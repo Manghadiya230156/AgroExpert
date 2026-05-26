@@ -1,0 +1,99 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Reports</title>
+
+    <link rel="stylesheet" href="{% static 'core/css/admin_reports.css' %}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+
+<div class="dashboard">
+
+    <aside class="sidebar">
+        <h2>AgroExpert Admin</h2>
+
+        <a href="{% url 'admin_dashboard' %}">Dashboard</a>
+        <a href="{% url 'admin_users' %}">Users</a>
+        <a href="{% url 'admin_soil_requests' %}">Soil Requests</a>
+        <a class="active" href="{% url 'admin_reports' %}">Reports</a>
+        <a href="{% url 'logout' %}">Logout</a>
+    </aside>
+
+    <main class="main">
+
+        <h1>📊 Analytics Reports</h1>
+
+        <div class="cards">
+
+            <div class="card">
+                <h3>Total Users</h3>
+                <p>{{ total_users }}</p>
+            </div>
+
+            <div class="card">
+                <h3>Farmers</h3>
+                <p>{{ farmers }}</p>
+            </div>
+
+            <div class="card">
+                <h3>Admins</h3>
+                <p>{{ admins }}</p>
+            </div>
+
+            <div class="card">
+                <h3>Yield Predictions</h3>
+                <p>{{ yield_count }}</p>
+            </div>
+
+        </div>
+
+        <div class="chart-box">
+            <canvas id="soilChart"></canvas>
+        </div>
+
+    </main>
+
+</div>
+
+<script>
+const ctx = document.getElementById("soilChart");
+
+new Chart(ctx, {
+    type: "bar",
+
+    data: {
+        labels: ["Pending", "Approved", "Completed", "Rejected"],
+
+        datasets: [{
+            label: "Soil Requests",
+
+            data: [
+                {{ pending }},
+                {{ approved }},
+                {{ completed }},
+                {{ rejected }}
+            ],
+
+            borderWidth: 1
+        }]
+    },
+
+    options: {
+        responsive: true,
+
+        plugins: {
+            legend: {
+                display: true
+            }
+        }
+    }
+});
+</script>
+
+
+</body>
+</html>

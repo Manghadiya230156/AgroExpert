@@ -1,0 +1,233 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fertilizer Recommendation | AgroExpert</title>
+
+<link rel="stylesheet" href="{% static 'core/css/fertilizer.css' %}">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+
+<div class="dashboard">
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+
+        <a href="{% url 'dashboard' %}" class="logo">AgroExpert</a>
+
+        <ul class="nav">
+            <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
+            <li><a href="{% url 'crop' %}">Crop Recommendation</a></li>
+            <li><a href="{% url 'soil_test' %}">Soil Test</a></li>
+            <li><a href="{% url 'weather' %}">Weather</a></li>
+            <li class="active"><a href="{% url 'fertilizer' %}">Fertilizer Recommendation</a></li>
+            <li><a href="{% url 'yield_prediction' %}">Yield Prediction</a></li>
+        </ul>
+
+        <!-- Bottom User -->
+        <div class="sidebar-bottom">
+
+            <div class="user-box">
+                <div class="avatar">👤</div>
+                <span>{{ request.user.username }}</span>
+            </div>
+
+            <a href="{% url 'logout' %}" class="logout-btn">Logout</a>
+
+        </div>
+
+    </aside>
+
+    <!-- Main -->
+    <main class="main">
+
+        <!-- Header -->
+        <div class="top-header-box">
+
+            <div class="header-left">
+
+                <div class="app-icon">🧪</div>
+
+                <div>
+                    <h3>AgroExpert Fertilizer Recommendation</h3>
+                    <p>Smart farming solutions powered by machine learning</p>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Input Card -->
+        <div class="card input-card">
+
+            <h2>Soil & Environment Parameters</h2>
+
+            <form method="POST">
+                {% csrf_token %}
+
+                <div class="form-grid">
+
+                    <div>
+                        <label>Temperature (0 - 38°C)</label>
+                        <input type="number" name="temperature" min="0" max="38" required>
+                    </div>
+
+                    <div>
+                        <label>Humidity (50 - 95%)</label>
+                        <input type="number" name="humidity" min="50" max="95" required>
+                    </div>
+
+                    <div>
+                        <label>Moisture (25 - 65)</label>
+                        <input type="number" name="moisture" min="25" max="65" required>
+                    </div>
+
+                    <div>
+                        <label>Soil Type</label>
+                        <select name="soil" required>
+                            <option value="">Select</option>
+                            <option>Clayey</option>
+                            <option>Loamy</option>
+                            <option>Red</option>
+                            <option>Black</option>
+                            <option>Sandy</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label>Crop Type</label>
+                        <select name="crop" required>
+                            <option value="">Select</option>
+                            <option>rice</option>
+                            <option>Wheat</option>
+                            <option>Tobacco</option>
+                            <option>Sugarcane</option>
+                            <option>Pulses</option>
+                            <option>pomegranate</option>
+                            <option>Paddy</option>
+                            <option>Oil seeds</option>
+                            <option>Millets</option>
+                            <option>Maize</option>
+                            <option>Ground Nuts</option>
+                            <option>Cotton</option>
+                            <option>coffee</option>
+                            <option>watermelon</option>
+                            <option>Barley</option>
+                            <option>kidneybeans</option>
+                            <option>orange</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label>Nitrogen (0 - 126)</label>
+                        <input type="number" name="nitrogen" min="0" max="126" required>
+                    </div>
+
+                    <div>
+                        <label>Phosphorous (0 - 54)</label>
+                        <input type="number" name="phosphorous" min="0" max="54" required>
+                    </div>
+
+                    <div>
+                        <label>Potassium (0 - 59)</label>
+                        <input type="number" name="potassium" min="0" max="59" required>
+                    </div>
+
+                </div>
+
+                <button type="submit" class="predict-btn">
+                    🔍 Get Recommendation
+                </button>
+
+            </form>
+
+            {% if result %}
+            <div class="result-box result-success" style="display:block;">
+                Recommendation complete!
+            </div>
+            {% endif %}
+
+        </div>
+
+        <!-- Output Grid -->
+        <div class="output-grid">
+
+            <!-- Recommendation -->
+            <div class="card recommendation-card">
+
+                <h3>Recommendation</h3>
+
+                <div class="recommend-box">
+                    <div class="emoji">🧪</div>
+                    <h4>Recommended Fertilizer</h4>
+
+                    <div class="crop-name">
+                        {% if result %}
+                            {{ result }}
+                        {% else %}
+                            --
+                        {% endif %}
+                    </div>
+
+                    <p>Best nutrient match for your soil condition</p>
+                </div>
+
+            </div>
+
+            <!-- History -->
+            <div class="card recent-card">
+
+                <h3>Recent Recommendations</h3>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Fertilizer</th>
+                            <th>N</th>
+                            <th>P</th>
+                            <th>K</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+                        {% for row in history %}
+                        <tr>
+                            <td>{{ row.created_at|date:"d M Y H:i" }}</td>
+                            <td>{{ row.prediction }}</td>
+                            <td>{{ row.nitrogen }}</td>
+                            <td>{{ row.phosphorous }}</td>
+                            <td>{{ row.potassium }}</td>
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <td colspan="5">No history yet</td>
+                        </tr>
+                        {% endfor %}
+
+                    </tbody>
+                </table>
+
+            </div>
+
+            <!-- Chart -->
+            <div class="card trend-card">
+                <h3>Recommendation Trends</h3>
+                <canvas id="trendChart"></canvas>
+            </div>
+
+        </div>
+
+    </main>
+
+</div>
+
+<script src="{% static 'core/js/fertilizer.js' %}"></script>
+
+</body>
+</html>

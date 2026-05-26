@@ -1,0 +1,76 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Manage Users</title>
+<link rel="stylesheet" href="{% static 'core/css/admin_users.css' %}">
+</head>
+<body>
+
+<div class="dashboard">
+
+<aside class="sidebar">
+    <h2>AgroExpert Admin</h2>
+
+    <ul class="nav">
+        <li class="active"><a href="{% url 'admin_users' %}">Dashboard</a></li>
+        <a href="{% url 'admin_users' %}">Users</a>
+        <a href="{% url 'admin_soil_requests' %}">Soil Requests</a>
+        <li><a href="{% url 'admin_reports' %}">Reports</a></li>
+        <li><a href="{% url 'logout' %}">Logout</a></li>
+    </ul>
+</aside>
+
+<main class="main">
+
+<h1>👥 Users Management</h1>
+
+{% if messages %}
+    {% for message in messages %}
+        <div class="msg">{{ message }}</div>
+    {% endfor %}
+{% endif %}
+
+<table>
+<tr>
+<th>ID</th>
+<th>Username</th>
+<th>Email</th>
+<th>Role</th>
+<th>Action</th>
+</tr>
+
+{% for u in users %}
+<tr>
+<td>{{ u.id }}</td>
+<td>{{ u.username }}</td>
+<td>{{ u.email }}</td>
+<td>
+{% if u.profile.role == "admin" %}
+<span class="admin">Admin</span>
+{% else %}
+<span class="farmer">{{ u.profile.role }}</span>
+{% endif %}
+</td>
+
+<td>
+{% if u.profile.role != "admin" %}
+<a class="delete-btn" href="{% url 'delete_user' u.id %}"
+onclick="return confirm('Delete this user?')">
+Delete
+</a>
+{% else %}
+Protected
+{% endif %}
+</td>
+</tr>
+{% endfor %}
+
+</table>
+
+</main>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,106 @@
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Segoe UI;
+}
+
+body{
+background:#f3faf7;
+}
+
+.dashboard{
+display:flex;
+height:100vh;
+}
+
+.sidebar{
+width:260px;
+background:white;
+padding:25px;
+border-right:1px solid #ddd;
+
+}
+
+.logo{
+display:block;
+font-size:24px;
+font-weight:700;
+color:#15803d;
+margin-bottom:30px;
+text-decoration:none;
+}
+
+.nav{
+list-style:none;
+}
+
+.nav li{
+margin-bottom:10px;
+}
+
+.nav a{
+display:block;
+padding:12px;
+border-radius:8px;
+text-decoration:none;
+color:#374151;
+}
+
+.nav li.active a,
+.nav a:hover{
+background:#dcfce7;
+color:#15803d;
+}
+
+.main{
+flex:1;
+padding:30px;
+overflow:auto;
+}
+
+.header h1{
+color:#166534;
+margin-bottom:6px;
+}
+
+.header p{
+color:#6b7280;
+margin-bottom:30px;
+}
+
+.stats{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:20px;
+}
+
+.card{
+background:white;
+padding:25px;
+border-radius:16px;
+box-shadow:0 8px 20px rgba(0,0,0,.05);
+}
+
+.card h3{
+font-size:16px;
+color:#6b7280;
+margin-bottom:10px;
+}
+
+.card p{
+font-size:30px;
+font-weight:700;
+color:#15803d;
+}
+
+
+.sidebar ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.sidebar li {
+    list-style: none;
+}

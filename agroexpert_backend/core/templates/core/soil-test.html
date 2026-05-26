@@ -1,0 +1,194 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Soil Test | AgroExpert</title>
+
+<link rel="stylesheet" href="{% static 'core/css/soil-test.css' %}">
+<script src="{% static 'core/js/soil-test.js' %}" defer></script>
+</head>
+
+<body>
+
+<div class="dashboard">
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+
+        <a href="{% url 'dashboard' %}" class="logo">AgroExpert</a>
+
+        <ul class="nav">
+            <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
+            <li><a href="{% url 'crop' %}">Crop Recommendation</a></li>
+            <li class="active"><a href="{% url 'soil_test' %}">Soil Test</a></li>
+            <li><a href="{% url 'weather' %}">Weather</a></li>
+            <li><a href="{% url 'fertilizer' %}">Fertilizer Recommendation</a></li>
+            <li><a href="{% url 'yield_prediction' %}">Yield Prediction</a></li>
+        </ul>
+
+        <!-- User -->
+        <div class="user-section">
+            <div class="user-info">
+                <div class="user-avatar">👤</div>
+                <p class="user-name">{{ request.user.username }}</p>
+            </div>
+
+            <a href="{% url 'logout' %}" class="logout-btn">Logout</a>
+        </div>
+
+    </aside>
+
+    <!-- Main -->
+    <main class="main">
+
+        <!-- Header -->
+        <div class="top-header-box">
+            <div class="header-left">
+
+                <div class="app-icon">🧪</div>
+
+                <div>
+                    <h3>Soil Test Request</h3>
+                    <p>Schedule a professional soil analysis</p>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Success Message -->
+        {% if success %}
+        <div class="success-box">
+            Soil test request submitted successfully.
+        </div>
+        {% endif %}
+
+        <!-- Main Card -->
+        <div class="content-card">
+
+            <h3 class="section-title">Select Testing Laboratory</h3>
+
+            <!-- Labs -->
+            <div class="lab-grid">
+
+                <div class="lab-card" data-lab="Lab Center 1">
+                    <h4>Lab Center 1</h4>
+                    <p>📍 Ahmedabad</p>
+                    <p>📞 1234567890</p>
+                    <p>✉ lab1@example.com</p>
+                </div>
+
+                <div class="lab-card" data-lab="Lab 2">
+                    <h4>Lab 2</h4>
+                    <p>📍 Amreli</p>
+                    <p>📞 9876543210</p>
+                    <p>✉ lab2@example.com</p>
+                </div>
+
+                <div class="lab-card" data-lab="Lab 3">
+                    <h4>Lab 3</h4>
+                    <p>📍 Rajkot</p>
+                    <p>📞 7894561230</p>
+                    <p>✉ lab3@gmail.com</p>
+                </div>
+
+                <div class="lab-card" data-lab="Lab 4">
+                    <h4>Lab 4</h4>
+                    <p>📍 Junagadh</p>
+                    <p>📞 9876543210</p>
+                    <p>✉ lab4@gmail.com</p>
+                </div>
+
+                <div class="lab-card" data-lab="Lab 5">
+                    <h4>Lab 5</h4>
+                    <p>📍 Bhavnagar</p>
+                    <p>📞 9876543210</p>
+                    <p>✉ lab5@gmail.com</p>
+                </div>
+
+                <div class="lab-card" data-lab="Lab 6">
+                    <h4>Lab 6</h4>
+                    <p>📍 Surat</p>
+                    <p>📞 9876543210</p>
+                    <p>✉ lab6@gmail.com</p>
+                </div>
+
+                <div class="lab-card" data-lab="Lab 7">
+                    <h4>Lab 7</h4>
+                    <p>📍 Dwarka</p>
+                    <p>📞 9876543210</p>
+                    <p>✉ lab7@gmail.com</p>
+                </div>
+
+                <div class="lab-card" data-lab="Lab 8">
+                    <h4>Lab 8</h4>
+                    <p>📍 Surendranagar</p>
+                    <p>📞 9876543210</p>
+                    <p>✉ lab8@gmail.com</p>
+                </div>
+
+            </div>
+
+            <!-- Form -->
+            <form method="POST" id="soilForm" class="form">
+                {% csrf_token %}
+
+                <input type="hidden" name="lab_name" id="labInput">
+
+                <label>Soil Type</label>
+                <select name="soil_type" required>
+                    <option value="">Select soil type</option>
+                    <option>Black Soil</option>
+                    <option>Red Soil</option>
+                    <option>Sandy Soil</option>
+                    <option>Clay Soil</option>
+                </select>
+
+                <label>Appointment Date & Time</label>
+                <input type="datetime-local" name="appointment_date" required>
+
+                <label>Additional Notes</label>
+                <textarea name="notes" placeholder="Any special instructions or observations..."></textarea>
+
+                <button id="submitBtn" class="submit-btn" disabled>
+                    📩 Please select a lab
+                </button>
+
+            </form>
+
+        </div>
+
+        <!-- History -->
+        <div class="history-card">
+
+            <h3 class="section-title">My Requests</h3>
+
+            <table class="history-table">
+
+                <tr>
+                    <th>Lab</th>
+                    <th>Soil Type</th>
+                    <th>Date</th>
+                    <th>Status</th>
+                </tr>
+
+                {% for item in history %}
+                <tr>
+                    <td>{{ item.lab_name }}</td>
+                    <td>{{ item.soil_type }}</td>
+                    <td>{{ item.appointment_date }}</td>
+                    <td>{{ item.status }}</td>
+                </tr>
+                {% endfor %}
+
+            </table>
+
+        </div>
+
+    </main>
+
+</div>
+
+</body>
+</html>

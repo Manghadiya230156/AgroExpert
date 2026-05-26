@@ -1,0 +1,225 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us | AgroExpert</title>
+
+    <link rel="stylesheet" href="{% static 'core/css/about.css' %}">
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <header class="navbar">
+
+        <div class="logo">🌱 AgroExpert</div>
+
+        <nav>
+            <a href="{% url 'home' %}">Home</a>
+            <a href="{% url 'about' %}" class="active">About Us</a>
+            <a href="{% url 'contact' %}">Contact</a>
+            <a href="{% url 'scheme' %}">Farmer Scheme</a>
+            <a href="{% url 'login' %}" class="btn-outline">Login</a>
+        </nav>
+
+    </header>
+
+    <!-- HERO -->
+    <section class="about-hero">
+
+        <h1>About AgroExpert</h1>
+
+        <p>
+            Empowering farmers with technology for sustainable agriculture
+            and food security
+        </p>
+
+    </section>
+
+    <!-- STORY -->
+    <section class="section story">
+
+        <div class="story-img">
+            <img src="{% static 'core/images/India_Farming.jpg' %}" alt="Farmers">
+        </div>
+
+        <div class="story-text">
+
+            <h2>Our Story</h2>
+
+            <p class="lead">
+                Founded in 2020, AgroExpert began as a mission to help
+                farmers in rural India access better farming technologies.
+            </p>
+
+            <p>
+                What started as a passion project has grown into a movement
+                transforming agriculture across the country.
+            </p>
+
+            <p>
+                Today, we support thousands of farmers with tools for better
+                yield, lower costs, and smarter decisions.
+            </p>
+
+        </div>
+
+    </section>
+
+    <!-- IMPACT -->
+    <section class="impact">
+
+        <h2>Our Impact in Numbers</h2>
+
+        <div class="impact-grid">
+
+            <div class="impact-card">
+                <h3>10,000+</h3>
+                <p>Farmers Empowered</p>
+            </div>
+
+            <div class="impact-card">
+                <h3>500+</h3>
+                <p>Villages Covered</p>
+            </div>
+
+            <div class="impact-card">
+                <h3>95%</h3>
+                <p>Satisfaction Rate</p>
+            </div>
+
+            <div class="impact-card">
+                <h3>24/7</h3>
+                <p>Support Available</p>
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- MISSION -->
+    <section class="section mission">
+
+        <div class="mission-text">
+
+            <h2>Our Mission</h2>
+
+            <p>
+                We bridge traditional farming wisdom with modern
+                agricultural technology.
+            </p>
+
+            <p>
+                Every farmer deserves weather forecasts, soil analysis,
+                market prices, and expert guidance in one place.
+            </p>
+
+            <h3>Vision</h3>
+
+            <p>
+                To become India’s most trusted agricultural platform.
+            </p>
+
+        </div>
+
+        <div class="mission-img">
+            <img src="{% static 'core/images/sustainable-farm.jpeg' %}" alt="Farm">
+        </div>
+
+    </section>
+
+    <!-- VALUES -->
+    <section class="values">
+
+        <h2>Our Core Values</h2>
+
+        <div class="values-grid">
+
+            <div class="value-card">
+                <h3>🌿 Sustainability</h3>
+                <p>Eco-friendly farming practices with better yield.</p>
+            </div>
+
+            <div class="value-card">
+                <h3>🚜 Innovation</h3>
+                <p>Technology solving farming challenges.</p>
+            </div>
+
+            <div class="value-card">
+                <h3>📈 Growth</h3>
+                <p>Improving farmer productivity and profit.</p>
+            </div>
+
+            <div class="value-card">
+                <h3>🤝 Community</h3>
+                <p>Building farmer networks and knowledge sharing.</p>
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- CTA -->
+    <section class="cta">
+
+        <h2>Join Our Growing Community</h2>
+
+        <p>
+            Whether you're a farmer or expert, we'd love to have you.
+        </p>
+
+        <div class="cta-buttons">
+            <a href="{% url 'signup' %}" class="cta-primary">Sign Up Now</a>
+            <a href="{% url 'contact' %}" class="cta-secondary">Contact Us</a>
+        </div>
+
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+
+        <div class="footer-grid">
+
+            <div>
+                <h3>🌱 AgroExpert</h3>
+                <p>Empowering farmers with smart technology.</p>
+            </div>
+
+            <div>
+                <h4>Quick Links</h4>
+                <a href="{% url 'home' %}">Home</a>
+                <a href="{% url 'about' %}">About</a>
+                <a href="{% url 'contact' %}">Contact</a>
+            </div>
+
+            <div>
+                <h4>Services</h4>
+                <p>Weather Forecast</p>
+                <p>Soil Testing</p>
+                <p>Crop Advisory</p>
+                <p>Fertilizer</p>
+            </div>
+
+            <div>
+                <h4>Contact</h4>
+                <p>Ahmedabad, Gujarat</p>
+                <p>+91 7624023373</p>
+                <p>info@agroexpert.com</p>
+            </div>
+
+        </div>
+
+        <div class="footer-bottom">
+            © 2026 AgroExpert. All rights reserved.
+        </div>
+
+    </footer>
+
+</body>
+
+</html>
+

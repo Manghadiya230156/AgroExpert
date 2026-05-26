@@ -1,0 +1,70 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Admin Dashboard</title>
+<link rel="stylesheet" href="{% static 'core/css/admin-dashboard.css' %}">
+</head>
+<body>
+
+<div class="dashboard">
+
+<aside class="sidebar">
+    <a href="#" class="logo">AgroExpert Admin</a>
+
+    <ul class="nav">
+        <li><a href="{% url 'admin_users' %}">Dashboard</a></li>
+        <a href="{% url 'admin_users' %}">Users</a>
+        <a href="{% url 'admin_soil_requests' %}">Soil Requests</a>
+        <li><a href="{% url 'admin_reports' %}">Reports</a></li>
+        <li><a href="{% url 'logout' %}">Logout</a></li>
+    </ul>
+</aside>
+
+<main class="main">
+
+<div class="header">
+<h1>👑 Admin Dashboard</h1>
+<p>Manage AgroExpert system</p>
+</div>
+
+<div class="stats">
+
+<div class="card">
+<h3>Total Users</h3>
+<p>{{ total_users }}</p>
+</div>
+
+<div class="card">
+<h3>Farmers</h3>
+<p>{{ farmers }}</p>
+</div>
+
+<div class="card">
+<h3>Admins</h3>
+<p>{{ admins }}</p>
+</div>
+
+<div class="card">
+<h3>Pending Soil Requests</h3>
+<p>{{ pending_soil }}</p>
+</div>
+
+<div class="card">
+<h3>Fertilizer Uses</h3>
+<p>{{ fertilizer_count }}</p>
+</div>
+
+<div class="card">
+<h3>Yield Predictions</h3>
+<p>{{ yield_count }}</p>
+</div>
+
+</div>
+
+</main>
+</div>
+
+</body>
+</html>

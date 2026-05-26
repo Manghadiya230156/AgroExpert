@@ -1,0 +1,192 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Crop Recommendation | AgroExpert</title>
+    <link rel="stylesheet" href="{% static 'core/css/crop.css' %}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+
+<div class="dashboard">
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+
+        <a href="#" class="logo">AgroExpert</a>
+
+        <ul class="nav">
+            <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
+            <li class="active"><a href="{% url 'crop' %}">Crop Recommendation</a></li>
+            <li><a href="{% url 'soil_test' %}">Soil Test</a></li>
+            <li><a href="{% url 'weather' %}">Weather</a></li>
+            <li><a href="{% url 'fertilizer' %}">Fertilizer Recommendation</a></li>
+            <li><a href="{% url 'yield_prediction' %}">Yield Prediction</a></li>
+        </ul>
+
+        <div class="sidebar-bottom">
+
+            <div class="user-box">
+                <div class="avatar">👤</div>
+                <span>{{ request.user.username }}</span>
+            </div>
+
+            <a href="{% url 'logout' %}" class="logout-btn">Logout</a>
+
+        </div>
+
+    </aside>
+
+    <!-- Main -->
+    <main class="main">
+
+        <!-- Header -->
+        <div class="top-header-box">
+            <div class="header-left">
+                <div class="app-icon">🌱</div>
+                <div>
+                    <h3>AgroExpert Crop Recommendation</h3>
+                    <p>Smart farming solutions powered by machine learning</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- FORM -->
+        <div class="card input-card">
+
+            <h3>Input Parameters</h3>
+
+            <form method="POST" id="cropForm">
+                {% csrf_token %}
+
+                <div class="form-grid">
+
+                    <div>
+                        <label>Nitrogen (0–140)</label>
+                        <input id="n" name="n" type="number" min="0" max="140" required>
+                    </div>
+
+                    <div>
+                        <label>Phosphorus (5–145)</label>
+                        <input id="p" name="p" type="number" min="5" max="145" required>
+                    </div>
+
+                    <div>
+                        <label>Potassium (5–205)</label>
+                        <input id="k" name="k" type="number" min="5" max="205" required>
+                    </div>
+
+                    <div>
+                        <label>Temperature (9–50°C)</label>
+                        <input id="temp" name="temp" type="number" min="9" max="50" required>
+                    </div>
+
+                    <div>
+                        <label>Humidity (14–100%)</label>
+                        <input id="humidity" name="humidity" type="number" min="14" max="100" required>
+                    </div>
+
+                    <div>
+                        <label>pH Level (3.5–10)</label>
+                        <input id="ph" name="ph" type="number" step="0.1" min="3.5" max="10" required>
+                    </div>
+
+                    <div class="full">
+                        <label>Rainfall (20–300 mm)</label>
+                        <input id="rain" name="rain" type="number" min="20" max="300" required>
+                    </div>
+
+                </div>
+
+                <button type="submit" class="predict-btn">
+                    🔍 Get Recommendation
+                </button>
+
+            </form>
+
+        </div>
+
+        <!-- OUTPUT -->
+        <div class="output-grid">
+
+            <!-- RESULT -->
+            <div class="card recommendation-card">
+
+                <h3>Recommendation</h3>
+
+                <div class="recommend-box">
+                    <div class="emoji">🌾</div>
+                    <h4>Recommended Crop</h4>
+
+                    <div class="crop-name">
+                        {% if crop_result %}
+                            {{ crop_result }}
+                        {% else %}
+                            --
+                        {% endif %}
+                    </div>
+
+                    <p>Best suited for your soil and climate conditions</p>
+                </div>
+
+            </div>
+
+            <!-- HISTORY -->
+            <div class="card recent-card">
+
+                <h3>Recent Recommendations</h3>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Crop</th>
+                            <th>N</th>
+                            <th>P</th>
+                            <th>K</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        {% for item in history %}
+                        <tr>
+                            <td>{{ item.created_at }}</td>
+                            <td>{{ item.crop_result }}</td>
+                            <td>{{ item.nitrogen }}</td>
+                            <td>{{ item.phosphorus }}</td>
+                            <td>{{ item.potassium }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+
+                </table>
+
+            </div>
+
+            <!-- CHART (optional later) -->
+            <div class="card trend-card">
+                <h3>Recommendation Trends</h3>
+                <canvas id="trendChart"></canvas>
+            </div>
+
+        </div>
+
+    </main>
+
+</div>
+
+<!-- 🔥 Django → JS Data Bridge -->
+<script>
+    const chartLabels = {{ labels|safe }};
+    const chartData = {{ values|safe }};
+</script>
+
+<!-- Your JS file -->
+<script src="{% static 'core/js/crop.js' %}"></script>
+
+
+</body>
+</html>

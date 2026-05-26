@@ -1,0 +1,108 @@
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Segoe UI;
+}
+
+body{
+background:#f3faf7;
+}
+
+.dashboard{
+display:flex;
+min-height:100vh;
+}
+
+.sidebar{
+width:260px;
+background:#fff;
+padding:30px;
+border-right:1px solid #ddd;
+
+}
+
+.sidebar h2{
+color:#15803d;
+margin-bottom:30px;
+}
+
+.sidebar a{
+display:block;
+padding:12px;
+margin-bottom:10px;
+text-decoration:none;
+color:#333;
+border-radius:8px;
+}
+
+.sidebar a:hover,
+.sidebar .active{
+background:#dcfce7;
+color:#15803d;
+}
+
+.main{
+flex:1;
+padding:40px;
+}
+
+h1{
+margin-bottom:25px;
+color:#166534;
+}
+
+table{
+width:100%;
+background:#fff;
+border-collapse:collapse;
+border-radius:12px;
+overflow:hidden;
+box-shadow:0 8px 20px rgba(0,0,0,.05);
+}
+
+th,td{
+padding:16px;
+border-bottom:1px solid #eee;
+text-align:left;
+}
+
+th{
+background:#f0fdf4;
+}
+
+.admin{
+color:#dc2626;
+font-weight:700;
+}
+
+.farmer{
+color:#15803d;
+font-weight:700;
+}
+
+.delete-btn{
+background:#ef4444;
+color:#fff;
+padding:8px 14px;
+text-decoration:none;
+border-radius:8px;
+}
+
+.msg{
+background:#dcfce7;
+padding:12px;
+margin-bottom:15px;
+border-radius:8px;
+}
+
+
+.sidebar ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.sidebar li {
+    list-style: none;
+}

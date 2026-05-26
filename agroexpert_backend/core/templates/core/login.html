@@ -1,0 +1,61 @@
+{% load static %}    
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AgroExpert | Login</title>
+    <link rel="stylesheet" href="{% static 'core/css/login.css' %}">
+</head>
+
+<body>
+
+<div class="page">
+
+<header class="brand">
+    <h1>Agro<span>Expert</span></h1>
+</header>
+
+<main class="card">
+
+<div class="card-head">
+    <h2>Welcome Back</h2>
+</div>
+
+<form class="form" method="POST" id="loginForm">
+    {% csrf_token %}
+
+    {% if messages %}
+        {% for message in messages %}
+            <p style="color:red;">{{ message }}</p>
+        {% endfor %}
+    {% endif %}
+
+    <div class="field">
+        <label>Email</label>
+        <!-- 🔥 FIX: ADD name -->
+        <input id="email" name="username" type="text" placeholder="your@email.com">
+        <small class="error-message" id="emailError"></small>
+    </div>
+
+    <div class="field">
+        <label>Password</label>
+        <!-- 🔥 FIX: ADD name -->
+        <input id="password" name="password" type="password">
+        <small class="error-message" id="passwordError"></small>
+    </div>
+
+    <button type="submit" class="btn">Log in</button>
+
+    <p class="switch">
+        Don’t have an account? <a href="/signup/">Sign up</a>
+    </p>
+
+</form>
+
+</main>
+
+</div>
+
+<script src="{% static 'core/js/login.js' %}"></script>
+</body>
+</html>

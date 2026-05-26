@@ -1,0 +1,161 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Inter", system-ui, sans-serif;
+}
+
+body {
+    background: #ecfdf5;
+    min-height: 100vh;
+    color: #0f172a;
+}
+
+.page {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+}
+
+.brand {
+    text-align: center;
+    margin-bottom: 32px;
+}
+
+.brand h1 {
+    font-size: 40px;
+    font-weight: 700;
+    color: #166534;
+}
+
+.brand span {
+    color: #16a34a;
+}
+
+.brand p {
+    margin-top: 6px;
+    font-size: 14px;
+    color: #475569;
+}
+
+.card {
+    width: 100%;
+    max-width: 520px;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+    overflow: hidden;
+}
+
+.card-head {
+    background: linear-gradient(135deg, #16a34a, #15803d);
+    padding: 28px;
+    text-align: center;
+    color: white;
+}
+
+.card-head h2 {
+    font-size: 24px;
+    margin-bottom: 6px;
+}
+
+.card-head p {
+    font-size: 14px;
+    opacity: 0.9;
+}
+
+.form {
+    padding: 32px;
+}
+
+.field {
+    margin-bottom: 18px;
+}
+
+.field label {
+    display: block;
+    font-size: 14px;
+    margin-bottom: 6px;
+}
+
+.field input,
+.field select {
+    width: 100%;
+    padding: 12px 14px;
+    border-radius: 12px;
+    border: 1px solid #cbd5e1;
+    font-size: 14px;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.field input:focus,
+.field select:focus {
+    outline: none;
+    border-color: #22c55e;
+    box-shadow: 0 0 0 3px rgba(34,197,94,0.15);
+}
+
+/* ERROR STATES */
+
+.error-message {
+    color: #dc2626;
+    font-size: 13px;
+    margin-top: 6px;
+    display: block;
+    min-height: 16px;
+}
+
+.input-error {
+    border-color: #dc2626 !important;
+    box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.15);
+}
+
+/* BUTTON */
+
+.btn {
+    width: 100%;
+    padding: 14px;
+    margin-top: 8px;
+    border: none;
+    border-radius: 12px;
+    background: #16a34a;
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.1s;
+}
+
+.btn:hover {
+    background: #15803d;
+}
+
+.btn:active {
+    transform: scale(0.98);
+}
+
+.switch {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 14px;
+    color: #475569;
+}
+
+.switch a {
+    color: #16a34a;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.switch a:hover {
+    text-decoration: underline;
+}
+
+.footer {
+    margin-top: 32px;
+    font-size: 13px;
+    color: #64748b;
+}

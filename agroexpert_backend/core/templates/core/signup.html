@@ -1,0 +1,110 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AgroExpert | Sign Up</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="{% static 'core/css/signup.css' %}">
+</head>
+
+<body>
+
+<div class="page">
+
+    <header class="brand">
+        <h1>Agro<span>Expert</span></h1>
+        <p>Create your account to access smart farming solutions</p>
+    </header>
+
+    <main class="card">
+
+        <div class="card-head">
+            <h2>Create Account</h2>
+            <p>Join AgroExpert today</p>
+        </div>
+
+        <!-- 🔥 FORM -->
+        <form class="form" method="POST" id="signupForm">
+            {% csrf_token %}
+
+            <!-- Django messages -->
+            {% if messages %}
+                {% for message in messages %}
+                    <p style="color:red; text-align:center;">{{ message }}</p>
+                {% endfor %}
+            {% endif %}
+
+            <div class="field">
+                <label>Username</label>
+                <input name="username" id="username" type="text" placeholder="username">
+                <small class="error-message" id="usernameError"></small>
+            </div>
+
+            <div class="field">
+                <label>Full Name</label>
+                <input name="fullname" id="fullname" type="text" placeholder="Your full name">
+                <small class="error-message" id="fullnameError"></small>
+            </div>
+
+            <div class="field">
+                <label>Email</label>
+                <input name="email" id="email" type="text" placeholder="your@email.com">
+                <small class="error-message" id="emailError"></small>
+            </div>
+
+            <div class="field">
+                <label>Phone Number</label>
+                <input name="phone" id="phone" type="text" placeholder="9876543210">
+                <small class="error-message" id="phoneError"></small>
+            </div>
+
+            <div class="field">
+                <label>Password</label>
+                <input name="password" id="password" type="password" placeholder="••••••••">
+                <small class="error-message" id="passwordError"></small>
+            </div>
+
+            <div class="field">
+                <label>Confirm Password</label>
+                <input type="password" id="confirmPassword" name="confirm_password">
+                <small class="error-message" id="confirmPasswordError"></small>
+            </div>
+
+            <!-- <div class="field">
+                <label>Role</label>
+                <select name="role" id="role">
+                    <option value="">Select Role</option>
+                    <option>Farmer</option>
+                    <option>Lab</option>
+                </select>
+                <small class="error-message" id="roleError"></small>
+            </div> -->
+
+            <div class="field">
+                <label>Location</label>
+                <input name="location" id="location" type="text" placeholder="City / Village">
+                <small class="error-message" id="locationError"></small>
+            </div>
+
+            <button type="submit" class="btn">Create Account</button>
+
+            <p class="switch">
+                Already have an account? <a href="/login/">Log in</a>
+            </p>
+
+        </form>
+
+    </main>
+
+    <footer class="footer">
+        © 2026 AgroExpert. All rights reserved.
+    </footer>
+
+</div>
+<script src="{% static 'core/js/signup.js' %}"></script>
+
+
+</body>
+</html>

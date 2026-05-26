@@ -1,0 +1,90 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AgroExpert Dashboard</title>
+
+    <link rel="stylesheet" href="{% static 'core/css/features.css' %}">
+</head>
+<body>
+
+<div class="dashboard">
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <a href="{% url 'home' %}" class="logo">AgroExpert</a>
+
+        <ul class="nav">
+            <li class="active"><a href="{% url 'dashboard' %}">Dashboard</a></li>
+            <li><a href="{% url 'crop' %}">Crop Recommendation</a></li>
+            <li><a href="{% url 'soil_test' %}">Soil Test</a></li>
+            <li><a href="{% url 'weather' %}">Weather</a></li>
+            <li><a href="{% url 'fertilizer' %}">Fertilizer Recommendation</a></li>
+            <li><a href="{% url 'yield_prediction' %}">Yield Prediction</a></li>
+        </ul>
+
+        <!-- User -->
+        <div class="sidebar-bottom">
+            <div class="user-box">
+                <div class="avatar">👤</div>
+                <p class="user-name">{{ request.user.username }}</p>
+            </div>
+
+            <a href="{% url 'logout' %}" class="logout-btn">Logout</a>
+        </div>
+    </aside>
+
+    <!-- Main -->
+    <main class="main">
+
+        <div class="dashboard-header">
+            <div class="dashboard-title">
+                <div class="avatar">👨‍🌾</div>
+                <h1>Farmer Dashboard</h1>
+            </div>
+        </div>
+
+        <h3 class="section-title">Farm Tools</h3>
+
+        <div class="cards">
+
+            <a href="{% url 'soil_test' %}" class="card">
+                <div class="icon">🧪</div>
+                <h4>Request Soil Test</h4>
+                <p>Submit soil sample for lab analysis.</p>
+            </a>
+
+            <a href="{% url 'crop' %}" class="card">
+                <div class="icon">📊</div>
+                <h4>Crop Suggestions</h4>
+                <p>AI-based crop recommendations.</p>
+            </a>
+
+            <a href="{% url 'fertilizer' %}" class="card">
+                <div class="icon">🧴</div>
+                <h4>Fertilizer Plan</h4>
+                <p>Smart fertilizer suggestions.</p>
+            </a>
+
+            <a href="{% url 'yield_prediction' %}" class="card">
+                <div class="icon">📈</div>
+                <h4>Yield Prediction</h4>
+                <p>Estimate crop production output.</p>
+            </a>
+
+            <a href="{% url 'weather' %}" class="card">
+                <div class="icon">☁️</div>
+                <h4>Weather Forecast</h4>
+                <p>Live farm weather insights.</p>
+            </a>
+
+        </div>
+
+    </main>
+
+</div>
+
+</body>
+</html>

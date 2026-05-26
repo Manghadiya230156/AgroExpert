@@ -1,0 +1,80 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Soil Requests</title>
+<link rel="stylesheet" href="{% static 'core/css/admin_soil.css' %}">
+</head>
+<body>
+
+<div class="dashboard">
+
+<aside class="sidebar">
+<h2>AgroExpert Admin</h2>
+
+<ul class="nav">
+        <a href="{% url 'admin_users' %}">Dashboard</a></li>
+        <a href="{% url 'admin_users' %}">Users</a>
+        <a href="{% url 'admin_soil_requests' %}">Soil Requests</a>
+        <a href="{% url 'admin_reports' %}">Reports</a></li>
+        <a href="{% url 'logout' %}">Logout</a></li>
+    </ul>
+</aside>
+
+<main class="main">
+
+<h1>🧪 Soil Test Requests</h1>
+
+<table>
+<tr>
+<th>ID</th>
+<th>Farmer</th>
+<th>Lab</th>
+<th>Soil Type</th>
+<th>Date</th>
+<th>Status</th>
+<th>Actions</th>
+</tr>
+
+{% for r in requests %}
+<tr>
+<td>{{ r.id }}</td>
+<td>{{ r.user.username }}</td>
+<td>{{ r.lab_name }}</td>
+<td>{{ r.soil_type }}</td>
+<td>{{ r.appointment_date }}</td>
+<td>
+<span class="status {{ r.status|lower }}">
+{{ r.status }}
+</span>
+</td>
+
+<td class="actions">
+
+<a class="approve"
+href="{% url 'update_soil_status' r.id 'Approved' %}">
+Approve
+</a>
+
+<a class="reject"
+href="{% url 'update_soil_status' r.id 'Rejected' %}">
+Reject
+</a>
+
+<a class="done"
+href="{% url 'update_soil_status' r.id 'Completed' %}">
+Complete
+</a>
+
+</td>
+</tr>
+{% endfor %}
+
+</table>
+
+</main>
+</div>
+
+</body>
+</html>
