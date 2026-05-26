@@ -63,4 +63,4 @@ python manage.py runserver
 ## Contributors
 
 - Man Ghadiya
-- Your Teammate Name
+
