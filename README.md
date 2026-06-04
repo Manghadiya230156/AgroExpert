@@ -63,4 +63,5 @@ python manage.py runserver
 ## Contributors
 
 - Man Ghadiya
+- Hemal Parmar
 
