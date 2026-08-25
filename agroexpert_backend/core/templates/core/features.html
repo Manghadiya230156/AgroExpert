@@ -4,85 +4,290 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AgroExpert Dashboard</title>
 
     <link rel="stylesheet" href="{% static 'core/css/features.css' %}">
 </head>
+
 <body>
 
 <div class="dashboard">
 
-    <!-- Sidebar -->
+    <!-- =========================
+         DESKTOP SIDEBAR
+    ========================== -->
+
     <aside class="sidebar">
-        <a href="{% url 'home' %}" class="logo">AgroExpert</a>
+
+        <a href="{% url 'home' %}" class="logo">
+            AgroExpert
+        </a>
 
         <ul class="nav">
-            <li class="active"><a href="{% url 'dashboard' %}">Dashboard</a></li>
-            <li><a href="{% url 'crop' %}">Crop Recommendation</a></li>
-            <li><a href="{% url 'soil_test' %}">Soil Test</a></li>
-            <li><a href="{% url 'weather' %}">Weather</a></li>
-            <li><a href="{% url 'fertilizer' %}">Fertilizer Recommendation</a></li>
-            <li><a href="{% url 'yield_prediction' %}">Yield Prediction</a></li>
+
+            <li class="active">
+                <a href="{% url 'dashboard' %}">
+                    Dashboard
+                </a>
+            </li>
+
+            <li>
+                <a href="{% url 'crop' %}">
+                    Crop Recommendation
+                </a>
+            </li>
+
+            <li>
+                <a href="{% url 'soil_test' %}">
+                    Soil Test
+                </a>
+            </li>
+
+            <li>
+                <a href="{% url 'weather' %}">
+                    Weather
+                </a>
+            </li>
+
+            <li>
+                <a href="{% url 'fertilizer' %}">
+                    Fertilizer Recommendation
+                </a>
+            </li>
+
+            <li>
+                <a href="{% url 'yield_prediction' %}">
+                    Yield Prediction
+                </a>
+            </li>
+
         </ul>
 
-        <!-- User -->
+        <!-- Desktop User -->
+
         <div class="sidebar-bottom">
+
             <div class="user-box">
-                <div class="avatar">👤</div>
-                <p class="user-name">{{ request.user.username }}</p>
+
+                <div class="avatar">
+                    👤
+                </div>
+
+                <p class="user-name">
+                    {{ request.user.username }}
+                </p>
+
             </div>
 
-            <a href="{% url 'logout' %}" class="logout-btn">Logout</a>
+            <a href="{% url 'logout' %}" class="logout-btn">
+                Logout
+            </a>
+
         </div>
+
     </aside>
 
-    <!-- Main -->
+
+    <!-- =========================
+         MAIN CONTENT
+    ========================== -->
+
     <main class="main">
 
+        <!-- Header -->
+
         <div class="dashboard-header">
+
             <div class="dashboard-title">
-                <div class="avatar">👨‍🌾</div>
-                <h1>Farmer Dashboard</h1>
+
+                <div class="avatar">
+                    👨‍🌾
+                </div>
+
+                <h1>
+                    Farmer Dashboard
+                </h1>
+
             </div>
+
+
+            <!-- Mobile Account -->
+
+            <details class="mobile-account">
+
+                <summary>
+                    👤
+                </summary>
+
+                <div class="account-menu">
+
+                    <div class="account-user">
+                        <div class="account-avatar">
+                            👤
+                        </div>
+
+                        <div>
+                            <strong>{{ request.user.username }}</strong>
+                            <small>Farmer Account</small>
+                        </div>
+                    </div>
+
+                    <div class="account-divider"></div>
+
+                    <a href="{% url 'logout' %}" class="mobile-logout">
+                        🚪 Logout
+                    </a>
+
+                </div>
+
+            </details>
+
         </div>
 
-        <h3 class="section-title">Farm Tools</h3>
+
+        <h3 class="section-title">
+            Farm Tools
+        </h3>
+
+
+        <!-- =========================
+             FARM TOOL CARDS
+        ========================== -->
 
         <div class="cards">
 
             <a href="{% url 'soil_test' %}" class="card">
-                <div class="icon">🧪</div>
-                <h4>Request Soil Test</h4>
-                <p>Submit soil sample for lab analysis.</p>
+
+                <div class="icon">
+                    🧪
+                </div>
+
+                <div>
+                    <h4>
+                        Request Soil Test
+                    </h4>
+
+                    <p>
+                        Submit your soil sample for professional lab analysis.
+                    </p>
+                </div>
+
             </a>
+
 
             <a href="{% url 'crop' %}" class="card">
-                <div class="icon">📊</div>
-                <h4>Crop Suggestions</h4>
-                <p>AI-based crop recommendations.</p>
+
+                <div class="icon">
+                    🌾
+                </div>
+
+                <div>
+                    <h4>
+                        Crop Suggestions
+                    </h4>
+
+                    <p>
+                        Get AI-based crop recommendations from soil data.
+                    </p>
+                </div>
+
             </a>
+
 
             <a href="{% url 'fertilizer' %}" class="card">
-                <div class="icon">🧴</div>
-                <h4>Fertilizer Plan</h4>
-                <p>Smart fertilizer suggestions.</p>
+
+                <div class="icon">
+                    🧴
+                </div>
+
+                <div>
+                    <h4>
+                        Fertilizer Plan
+                    </h4>
+
+                    <p>
+                        Get smart fertilizer recommendations for your crop.
+                    </p>
+                </div>
+
             </a>
+
 
             <a href="{% url 'yield_prediction' %}" class="card">
-                <div class="icon">📈</div>
-                <h4>Yield Prediction</h4>
-                <p>Estimate crop production output.</p>
+
+                <div class="icon">
+                    📈
+                </div>
+
+                <div>
+                    <h4>
+                        Yield Prediction
+                    </h4>
+
+                    <p>
+                        Estimate your expected crop production.
+                    </p>
+                </div>
+
             </a>
 
+
             <a href="{% url 'weather' %}" class="card">
-                <div class="icon">☁️</div>
-                <h4>Weather Forecast</h4>
-                <p>Live farm weather insights.</p>
+
+                <div class="icon">
+                    ☁️
+                </div>
+
+                <div>
+                    <h4>
+                        Weather Forecast
+                    </h4>
+
+                    <p>
+                        Check live weather conditions and forecasts.
+                    </p>
+                </div>
+
             </a>
 
         </div>
 
     </main>
+
+
+    <!-- =========================
+         MOBILE BOTTOM NAVIGATION
+    ========================== -->
+
+    <nav class="mobile-nav">
+
+        <a href="{% url 'dashboard' %}" class="active">
+            <span>🏠</span>
+            Home
+        </a>
+
+        <a href="{% url 'crop' %}">
+            <span>🌾</span>
+            Crop
+        </a>
+
+        <a href="{% url 'soil_test' %}">
+            <span>🧪</span>
+            Soil
+        </a>
+
+        <a href="{% url 'weather' %}">
+            <span>☁️</span>
+            Weather
+        </a>
+
+        <a href="{% url 'fertilizer' %}">
+            <span>🧴</span>
+            Fertilizer
+        </a>
+
+    </nav>
 
 </div>
 
