@@ -2,7 +2,7 @@
     margin:0;
     padding:0;
     box-sizing:border-box;
-    font-family:"Segoe UI", Arial, sans-serif;
+    font-family:"Segoe UI",Arial,sans-serif;
 }
 
 body{
@@ -13,15 +13,16 @@ body{
 /* =========================
    Layout
 ========================= */
+
 .dashboard{
     display:flex;
-    height:100vh;
-    overflow:hidden;
+    min-height:100vh;
 }
 
 /* =========================
    Sidebar
 ========================= */
+
 .sidebar{
     width:260px;
     background:#ffffff;
@@ -29,24 +30,24 @@ body{
     border-right:1px solid #e5e7eb;
 
     position:fixed;
-    left:0;
     top:0;
+    left:0;
     height:100vh;
 
     display:flex;
     flex-direction:column;
+    z-index:100;
 }
 
 .logo{
     display:block;
     font-size:22px;
     font-weight:700;
-    margin-bottom:30px;
     color:#15803d;
     text-decoration:none;
+    margin-bottom:30px;
 }
 
-/* Navigation */
 .nav{
     list-style:none;
     flex:1;
@@ -72,70 +73,230 @@ body{
 }
 
 /* =========================
-   User Section
+   Desktop User
 ========================= */
-.user-section{
+
+.sidebar-bottom{
     margin-top:auto;
-    padding-top:15px;
+    padding-top:18px;
 }
 
-.user-info{
+.user-box{
     display:flex;
     align-items:center;
     gap:10px;
-    margin-bottom:10px;
+    margin-bottom:14px;
+    padding:0 4px;
 }
 
-.user-avatar{
+.avatar{
     width:34px;
     height:34px;
     border-radius:50%;
     background:#dcfce7;
+
     display:flex;
     align-items:center;
     justify-content:center;
+
     font-size:16px;
+    flex-shrink:0;
 }
 
-.user-name{
+.user-box span{
     font-size:14px;
-    font-weight:600;
+    font-weight:500;
+    color:#111827;
 }
 
 .logout-btn{
     display:block;
     width:100%;
-    padding:10px;
     text-align:center;
     text-decoration:none;
-    border-radius:10px;
-    background:#f6dcdc;
+
+    padding:10px 12px;
+    border-radius:12px;
+
+    background:#f8dede;
     color:#ef4444;
-    font-size:14px;
-    font-weight:600;
+
+    font-size:13px;
+    font-weight:500;
+
+    transition:0.3s;
+}
+
+.logout-btn:hover{
+    background:#f5cfcf;
 }
 
 /* =========================
    Main
 ========================= */
+
 .main{
     margin-left:260px;
     width:calc(100% - 260px);
-    height:100vh;
-    overflow-y:auto;
+
+    min-height:100vh;
+
     padding:30px;
+
+    overflow-y:auto;
+}
+
+/* =========================
+   Mobile Topbar
+========================= */
+
+.mobile-topbar{
+    display:none;
+}
+
+
+/* =========================
+   Mobile Profile Menu
+========================= */
+
+.mobile-profile-container{
+    position:relative;
+}
+
+.mobile-profile{
+    width:36px;
+    height:36px;
+
+    border:none;
+    border-radius:50%;
+
+    background:#dcfce7;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:17px;
+
+    cursor:pointer;
+}
+
+.profile-menu{
+    display:none;
+
+    position:absolute;
+
+    top:46px;
+    right:0;
+
+    width:190px;
+
+    background:#ffffff;
+
+    border-radius:14px;
+
+    padding:12px;
+
+    box-shadow:0 10px 30px rgba(0,0,0,0.15);
+
+    z-index:1000;
+}
+
+.profile-menu.show{
+    display:block;
+}
+
+.profile-user{
+    display:flex;
+    align-items:center;
+
+    gap:10px;
+
+    padding:5px;
+}
+
+.profile-avatar{
+    width:36px;
+    height:36px;
+
+    border-radius:50%;
+
+    background:#dcfce7;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:16px;
+}
+
+.profile-user strong{
+    display:block;
+
+    font-size:14px;
+
+    color:#111827;
+}
+
+.profile-user span{
+    display:block;
+
+    font-size:11px;
+
+    color:#6b7280;
+
+    margin-top:2px;
+}
+
+.profile-divider{
+    height:1px;
+
+    background:#e5e7eb;
+
+    margin:10px 0;
+}
+
+.profile-logout{
+    display:block;
+
+    width:100%;
+
+    padding:9px;
+
+    border-radius:9px;
+
+    text-decoration:none;
+
+    text-align:center;
+
+    background:#f8dede;
+
+    color:#ef4444;
+
+    font-size:13px;
+
+    font-weight:600;
+}
+
+.profile-logout:hover{
+    background:#f5cfcf;
 }
 
 /* =========================
    Header
 ========================= */
+
 .top-header-box{
     background:#ffffff;
     border-radius:14px;
+
     padding:18px 22px;
+
     display:flex;
     align-items:center;
+
     box-shadow:0 8px 20px rgba(0,0,0,0.05);
+
     margin-bottom:25px;
 }
 
@@ -148,17 +309,22 @@ body{
 .app-icon{
     width:42px;
     height:42px;
+
     border-radius:50%;
     background:#dcfce7;
+
     display:flex;
     align-items:center;
     justify-content:center;
+
     font-size:22px;
+    flex-shrink:0;
 }
 
 .header-left h3{
     font-size:20px;
     color:#166534;
+    margin-bottom:4px;
 }
 
 .header-left p{
@@ -169,24 +335,34 @@ body{
 /* =========================
    Success
 ========================= */
+
 .success-box{
     background:#dcfce7;
     color:#166534;
+
     padding:14px;
+
     border-radius:12px;
+
     margin-bottom:20px;
+
     font-weight:600;
 }
 
 /* =========================
-   Content Card
+   Cards
 ========================= */
+
 .content-card,
 .history-card{
     background:#ffffff;
+
     padding:30px;
+
     border-radius:18px;
+
     box-shadow:0 12px 30px rgba(0,0,0,0.06);
+
     margin-bottom:25px;
 }
 
@@ -198,20 +374,32 @@ body{
 /* =========================
    Lab Grid
 ========================= */
+
 .lab-grid{
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+
+    grid-template-columns:
+        repeat(auto-fit,minmax(240px,1fr));
+
     gap:18px;
+
     margin-bottom:28px;
 }
 
 .lab-card{
     padding:18px;
+
     border-radius:14px;
+
     border:2px solid #e5e7eb;
+
     cursor:pointer;
+
     transition:0.25s ease;
+
     position:relative;
+
+    background:#ffffff;
 }
 
 .lab-card:hover{
@@ -225,10 +413,14 @@ body{
 
 .lab-card.selected::after{
     content:"✔";
+
     position:absolute;
+
     top:10px;
     right:14px;
+
     color:#16a34a;
+
     font-weight:700;
 }
 
@@ -246,6 +438,7 @@ body{
 /* =========================
    Form
 ========================= */
+
 .form{
     display:flex;
     flex-direction:column;
@@ -260,11 +453,25 @@ body{
 .form select,
 .form input,
 .form textarea{
+    width:100%;
+
     padding:12px;
+
     border-radius:10px;
+
     border:1px solid #d1d5db;
+
     font-size:14px;
+
     outline:none;
+
+    background:#ffffff;
+}
+
+.form select:focus,
+.form input:focus,
+.form textarea:focus{
+    border-color:#16a34a;
 }
 
 .form textarea{
@@ -274,12 +481,19 @@ body{
 
 .submit-btn{
     margin-top:10px;
+
     padding:14px;
+
     border:none;
+
     border-radius:12px;
+
     background:#9ca3af;
+
     color:white;
+
     font-weight:600;
+
     cursor:not-allowed;
 }
 
@@ -289,8 +503,9 @@ body{
 }
 
 /* =========================
-   History Table
+   History
 ========================= */
+
 .history-table{
     width:100%;
     border-collapse:collapse;
@@ -299,8 +514,11 @@ body{
 .history-table th,
 .history-table td{
     padding:12px;
+
     border-bottom:1px solid #e5e7eb;
+
     text-align:left;
+
     font-size:14px;
 }
 
@@ -308,194 +526,193 @@ body{
     background:#f9fafb;
 }
 
+.table-wrapper{
+    width:100%;
+}
+
 /* =========================
-   Responsive
+   Mobile Bottom Navigation
 ========================= */
-/* =========================
-   Responsive
-========================= */
+
+.mobile-nav{
+    display:none;
+}
+
+
+/* =========================================================
+   TABLET / MOBILE
+========================================================= */
 
 @media(max-width:768px){
 
+    body{
+        padding-bottom:72px;
+    }
+
     /* Hide desktop sidebar */
+
     .sidebar{
         display:none;
     }
 
-    /* Full width main */
+    /* Main */
+
     .main{
         margin-left:0;
+
         width:100%;
-        height:100vh;
-        padding:20px 15px;
+
+        min-height:100vh;
+
+        padding:15px 10px 90px;
+
         overflow-y:auto;
-        overflow-x:hidden;
     }
 
-    /* Header */
+    /* =========================
+       Mobile Topbar
+    ========================== */
+
+    .mobile-topbar{
+        display:flex;
+
+        align-items:center;
+        justify-content:space-between;
+
+        background:#ffffff;
+
+        padding:10px 12px;
+
+        border-radius:13px;
+
+        margin-bottom:12px;
+
+        box-shadow:0 5px 15px rgba(0,0,0,0.05);
+
+        position:sticky;
+        top:0;
+
+        z-index:50;
+    }
+
+    .mobile-logo{
+        display:flex;
+        align-items:center;
+
+        gap:7px;
+
+        text-decoration:none;
+
+        color:#15803d;
+
+        font-size:17px;
+
+        font-weight:700;
+    }
+
+    .mobile-profile{
+        width:36px;
+        height:36px;
+
+        border-radius:50%;
+
+        background:#dcfce7;
+
+        display:flex;
+        align-items:center;
+        justify-content:center;
+
+        text-decoration:none;
+
+        font-size:17px;
+    }
+
+    /* =========================
+       Header
+    ========================== */
+
     .top-header-box{
-        padding:15px;
-        margin-bottom:20px;
+        padding:14px;
+
+        border-radius:13px;
+
+        margin-bottom:15px;
     }
 
     .header-left{
-        gap:12px;
+        gap:10px;
     }
 
     .app-icon{
-        width:38px;
-        height:38px;
-        font-size:20px;
-        flex-shrink:0;
+        width:36px;
+        height:36px;
+
+        font-size:19px;
     }
 
     .header-left h3{
-        font-size:18px;
+        font-size:16px;
         line-height:1.3;
     }
 
     .header-left p{
-        font-size:13px;
+        font-size:12px;
+        line-height:1.4;
     }
 
-    /* Success message */
+    /* =========================
+       Success
+    ========================== */
+
     .success-box{
-        padding:12px;
-        font-size:14px;
-    }
-
-    /* Content cards */
-    .content-card,
-    .history-card{
-        padding:22px 18px;
-        border-radius:15px;
-        margin-bottom:20px;
-    }
-
-    .section-title{
-        font-size:20px;
-        margin-bottom:18px;
-    }
-
-    /* Lab cards */
-    .lab-grid{
-        grid-template-columns:1fr;
-        gap:15px;
-        margin-bottom:22px;
-    }
-
-    .lab-card{
-        padding:16px;
-    }
-
-    .lab-card h4{
-        font-size:16px;
-    }
-
-    .lab-card p{
-        font-size:13px;
-    }
-
-    /* Form */
-    .form{
-        gap:12px;
-    }
-
-    .form label{
-        font-size:14px;
-    }
-
-    .form select,
-    .form input,
-    .form textarea{
-        width:100%;
         padding:11px;
-        font-size:14px;
-    }
 
-    .submit-btn{
-        width:100%;
-        padding:13px;
-    }
-
-    /* History table */
-    .history-card{
-        overflow:hidden;
-    }
-
-    .history-table{
-        display:block;
-        width:100%;
-        overflow-x:auto;
-        white-space:nowrap;
-    }
-
-    .history-table th,
-    .history-table td{
-        padding:10px;
         font-size:13px;
-    }
-}
 
+        border-radius:10px;
 
-/* =========================
-   Small Mobile
-========================= */
-
-@media(max-width:480px){
-
-    .main{
-        padding:15px 10px;
-    }
-
-    .top-header-box{
-        padding:13px;
-        border-radius:12px;
         margin-bottom:15px;
     }
 
-    .header-left{
-        gap:9px;
-    }
-
-    .app-icon{
-        width:34px;
-        height:34px;
-        font-size:18px;
-    }
-
-    .header-left h3{
-        font-size:16px;
-    }
-
-    .header-left p{
-        font-size:12px;
-    }
-
-    .success-box{
-        padding:10px;
-        font-size:13px;
-        border-radius:10px;
-    }
+    /* =========================
+       Cards
+    ========================== */
 
     .content-card,
     .history-card{
         padding:18px 14px;
+
         border-radius:13px;
+
+        margin-bottom:15px;
     }
 
     .section-title{
         font-size:18px;
+
         margin-bottom:15px;
     }
 
+    /* =========================
+       Labs
+    ========================== */
+
     .lab-grid{
+        grid-template-columns:1fr;
+
         gap:12px;
+
+        margin-bottom:20px;
     }
 
     .lab-card{
         padding:15px;
+
         border-radius:12px;
+    }
+
+    .lab-card:hover{
+        transform:none;
     }
 
     .lab-card h4{
@@ -504,7 +721,12 @@ body{
 
     .lab-card p{
         font-size:12px;
+        margin-bottom:4px;
     }
+
+    /* =========================
+       Form
+    ========================== */
 
     .form{
         gap:10px;
@@ -518,7 +740,10 @@ body{
     .form input,
     .form textarea{
         padding:10px;
+
         font-size:13px;
+
+        border-radius:9px;
     }
 
     .form textarea{
@@ -526,13 +751,203 @@ body{
     }
 
     .submit-btn{
+        width:100%;
+
         padding:12px;
+
         font-size:14px;
+
+        border-radius:11px;
+    }
+
+    /* =========================
+       History Table
+    ========================== */
+
+    .table-wrapper{
+        overflow-x:auto;
+
+        width:100%;
+    }
+
+    .history-table{
+        min-width:560px;
     }
 
     .history-table th,
     .history-table td{
-        padding:8px;
+        padding:9px;
+
         font-size:12px;
+
+        white-space:nowrap;
+    }
+
+    /* =========================
+       Bottom Navigation
+    ========================== */
+
+    .mobile-nav{
+        display:flex;
+
+        position:fixed;
+
+        left:0;
+        right:0;
+        bottom:0;
+
+        height:70px;
+
+        background:#ffffff;
+
+        border-top:1px solid #e5e7eb;
+
+        z-index:999;
+
+        justify-content:space-around;
+
+        align-items:stretch;
+
+        box-shadow:0 -5px 18px rgba(0,0,0,0.06);
+    }
+
+    .mobile-nav a{
+        flex:1;
+
+        max-width:90px;
+
+        display:flex;
+
+        flex-direction:column;
+
+        align-items:center;
+
+        justify-content:center;
+
+        gap:3px;
+
+        text-decoration:none;
+
+        color:#6b7280;
+
+        font-size:10px;
+
+        font-weight:500;
+
+        border-radius:10px;
+
+        margin:5px 2px;
+    }
+
+    .mobile-nav .nav-icon{
+        font-size:18px;
+
+        line-height:1;
+    }
+
+    .mobile-nav a.active{
+        background:#dcfce7;
+
+        color:#15803d;
+
+        font-weight:600;
+    }
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media(max-width:480px){
+
+    .main{
+        padding:10px 8px 88px;
+    }
+
+    .mobile-topbar{
+        padding:9px 11px;
+
+        border-radius:12px;
+    }
+
+    .mobile-logo{
+        font-size:16px;
+    }
+
+    .mobile-profile{
+        width:34px;
+        height:34px;
+
+        font-size:16px;
+    }
+
+    .top-header-box{
+        padding:12px;
+
+        border-radius:12px;
+    }
+
+    .app-icon{
+        width:34px;
+        height:34px;
+
+        font-size:18px;
+    }
+
+    .header-left h3{
+        font-size:15px;
+    }
+
+    .header-left p{
+        font-size:11px;
+    }
+
+    .content-card,
+    .history-card{
+        padding:16px 12px;
+
+        border-radius:12px;
+    }
+
+    .section-title{
+        font-size:17px;
+    }
+
+    .lab-card{
+        padding:14px;
+    }
+
+    .lab-card h4{
+        font-size:14px;
+    }
+
+    .lab-card p{
+        font-size:11px;
+    }
+
+    .form select,
+    .form input,
+    .form textarea{
+        padding:9px;
+
+        font-size:12px;
+    }
+
+    .submit-btn{
+        font-size:13px;
+        padding:11px;
+    }
+
+    .mobile-nav{
+        height:68px;
+    }
+
+    .mobile-nav a{
+        font-size:9px;
+    }
+
+    .mobile-nav .nav-icon{
+        font-size:17px;
     }
 }

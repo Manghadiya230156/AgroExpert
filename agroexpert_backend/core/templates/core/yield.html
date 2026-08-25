@@ -14,7 +14,7 @@
 
 <div class="dashboard">
 
-    <!-- Sidebar -->
+    <!-- Desktop Sidebar -->
     <aside class="sidebar">
 
         <a href="{% url 'dashboard' %}" class="logo">AgroExpert</a>
@@ -28,7 +28,6 @@
             <li class="active"><a href="{% url 'yield_prediction' %}">Yield Prediction</a></li>
         </ul>
 
-        <!-- Bottom User -->
         <div class="sidebar-bottom">
 
             <div class="user-box">
@@ -44,6 +43,44 @@
 
     <!-- Main -->
     <main class="main">
+
+        <!-- Mobile Top Bar -->
+        <div class="mobile-topbar">
+
+            <a href="{% url 'dashboard' %}" class="mobile-logo">
+                🌱 AgroExpert
+            </a>
+
+            <div class="mobile-profile-container">
+
+                <button type="button" class="mobile-profile" id="profileBtn">
+                    👤
+                </button>
+
+                <div class="profile-menu" id="profileMenu">
+
+                    <div class="profile-user">
+
+                        <div class="profile-avatar">👤</div>
+
+                        <div>
+                            <strong>{{ request.user.username }}</strong>
+                            <span>Farmer</span>
+                        </div>
+
+                    </div>
+
+                    <div class="profile-divider"></div>
+
+                    <a href="{% url 'logout' %}" class="profile-logout">
+                        🚪 Logout
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
 
         <!-- Header -->
         <div class="top-header-box">
@@ -61,17 +98,17 @@
 
         </div>
 
-        <!-- Card -->
+        <!-- Input Card -->
         <div class="card">
 
             <h2>Input Parameters</h2>
 
             <form method="POST" id="yieldForm">
+
                 {% csrf_token %}
 
                 <div class="form-grid">
 
-                    <!-- Crop -->
                     <div>
                         <label>Crop *</label>
                         <select name="crop" required>
@@ -100,13 +137,11 @@
                         </select>
                     </div>
 
-                    <!-- Year -->
                     <div>
                         <label>Crop Year *</label>
                         <input type="number" name="crop_year" min="2000" max="2035" required>
                     </div>
 
-                    <!-- Season -->
                     <div>
                         <label>Season *</label>
                         <select name="season" required>
@@ -120,7 +155,6 @@
                         </select>
                     </div>
 
-                    <!-- State -->
                     <div>
                         <label>State *</label>
                         <select name="state" required>
@@ -148,25 +182,21 @@
                         </select>
                     </div>
 
-                    <!-- Area -->
                     <div>
                         <label>Area (0.1 - 50 ha)</label>
                         <input type="number" name="area" min="0.1" max="50" step="0.1" required>
                     </div>
 
-                    <!-- Rainfall -->
                     <div>
                         <label>Annual Rainfall (0 - 400 mm)</label>
                         <input type="number" name="annual_rainfall" min="0" max="400" required>
                     </div>
 
-                    <!-- Fertilizer -->
                     <div>
                         <label>Fertilizer (0 - 300 kg)</label>
                         <input type="number" name="fertilizer" min="0" max="300" required>
                     </div>
 
-                    <!-- Pesticide -->
                     <div>
                         <label>Pesticide (0 - 100 kg)</label>
                         <input type="number" name="pesticide" min="0" max="100" required>
@@ -175,18 +205,23 @@
                 </div>
 
                 <button type="submit" class="predict-btn">
-                    Predict Yield
+                    📈 Predict Yield
                 </button>
 
             </form>
 
-            <!-- Result -->
             {% if result %}
-            <div class="result-card" style="display:block;">
+
+            <div class="result-card">
+
                 <h2>🎉 Prediction Successful!</h2>
+
                 <h1>{{ result }} tons/hectare</h1>
+
                 <p>Based on your inputs and our AI model</p>
+
             </div>
+
             {% endif %}
 
         </div>
@@ -196,38 +231,82 @@
 
             <h2>Recent Predictions</h2>
 
-            <table>
-                <thead>
-                    <tr>
-                        <th>Date</th>
-                        <th>Crop</th>
-                        <th>State</th>
-                        <th>Yield</th>
-                    </tr>
-                </thead>
+            <div class="table-wrapper">
 
-                <tbody>
+                <table>
 
-                    {% for row in history %}
-                    <tr>
-                        <td>{{ row.created_at|date:"d M Y H:i" }}</td>
-                        <td>{{ row.crop }}</td>
-                        <td>{{ row.state }}</td>
-                        <td>{{ row.prediction }}</td>
-                    </tr>
-                    {% empty %}
-                    <tr>
-                        <td colspan="4">No prediction history</td>
-                    </tr>
-                    {% endfor %}
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Crop</th>
+                            <th>State</th>
+                            <th>Yield</th>
+                        </tr>
+                    </thead>
 
-                </tbody>
+                    <tbody>
 
-            </table>
+                        {% for row in history %}
+
+                        <tr>
+                            <td>{{ row.created_at|date:"d M Y H:i" }}</td>
+                            <td>{{ row.crop }}</td>
+                            <td>{{ row.state }}</td>
+                            <td>{{ row.prediction }}</td>
+                        </tr>
+
+                        {% empty %}
+
+                        <tr>
+                            <td colspan="4">No prediction history</td>
+                        </tr>
+
+                        {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
 
         </div>
 
     </main>
+
+    <!-- Mobile Bottom Navigation -->
+    <nav class="mobile-nav">
+
+        <a href="{% url 'dashboard' %}">
+            <span class="nav-icon">🏠</span>
+            <span>Home</span>
+        </a>
+
+        <a href="{% url 'crop' %}">
+            <span class="nav-icon">🌾</span>
+            <span>Crop</span>
+        </a>
+
+        <a href="{% url 'soil_test' %}">
+            <span class="nav-icon">🧪</span>
+            <span>Soil</span>
+        </a>
+
+        <a href="{% url 'weather' %}">
+            <span class="nav-icon">☁️</span>
+            <span>Weather</span>
+        </a>
+
+        <a href="{% url 'fertilizer' %}">
+            <span class="nav-icon">🧴</span>
+            <span>Fertilizer</span>
+        </a>
+
+        <a href="{% url 'yield_prediction' %}" class="active">
+            <span class="nav-icon">📈</span>
+            <span>Yield</span>
+        </a>
+
+    </nav>
 
 </div>
 

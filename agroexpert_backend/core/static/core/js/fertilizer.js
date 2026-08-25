@@ -476,3 +476,30 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 });
+
+
+
+
+// ==========================
+// Mobile Profile Menu
+// ==========================
+
+const profileBtn = document.getElementById("profileBtn");
+const profileMenu = document.getElementById("profileMenu");
+
+if (profileBtn && profileMenu) {
+
+    profileBtn.addEventListener("click", function(e) {
+        e.stopPropagation();
+        profileMenu.classList.toggle("show");
+    });
+
+    document.addEventListener("click", function() {
+        profileMenu.classList.remove("show");
+    });
+
+    profileMenu.addEventListener("click", function(e) {
+        e.stopPropagation();
+    });
+
+}

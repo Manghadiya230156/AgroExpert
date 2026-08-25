@@ -14,67 +14,234 @@
 
 <div class="dashboard">
 
-    <!-- Sidebar -->
+    <!-- =========================
+         Desktop Sidebar
+    ========================== -->
     <aside class="sidebar">
 
-        <a href="{% url 'dashboard' %}" class="logo">AgroExpert</a>
+        <a href="{% url 'dashboard' %}" class="logo">
+            AgroExpert
+        </a>
 
         <ul class="nav">
-            <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
-            <li><a href="{% url 'crop' %}">Crop Recommendation</a></li>
-            <li><a href="{% url 'soil_test' %}">Soil Test</a></li>
-            <li class="active"><a href="{% url 'weather' %}">Weather</a></li>
-            <li><a href="{% url 'fertilizer' %}">Fertilizer Recommendation</a></li>
-            <li><a href="{% url 'yield_prediction' %}">Yield Prediction</a></li>
+
+            <li>
+                <a href="{% url 'dashboard' %}">
+                    Dashboard
+                </a>
+            </li>
+
+            <li>
+                <a href="{% url 'crop' %}">
+                    Crop Recommendation
+                </a>
+            </li>
+
+            <li>
+                <a href="{% url 'soil_test' %}">
+                    Soil Test
+                </a>
+            </li>
+
+            <li class="active">
+                <a href="{% url 'weather' %}">
+                    Weather
+                </a>
+            </li>
+
+            <li>
+                <a href="{% url 'fertilizer' %}">
+                    Fertilizer Recommendation
+                </a>
+            </li>
+
+            <li>
+                <a href="{% url 'yield_prediction' %}">
+                    Yield Prediction
+                </a>
+            </li>
+
         </ul>
 
-        <!-- User -->
-        <div class="user-section">
-            <div class="user-info">
-                <div class="user-avatar">👤</div>
-                <p class="user-name">{{ request.user.username }}</p>
+        <!-- Desktop User -->
+        <div class="sidebar-bottom">
+
+            <div class="user-box">
+                <div class="avatar">👤</div>
+                <span>{{ request.user.username }}</span>
             </div>
 
-            <a href="{% url 'logout' %}" class="logout-btn">Logout</a>
+            <a href="{% url 'logout' %}" class="logout-btn">
+                Logout
+            </a>
+
         </div>
 
     </aside>
 
-    <!-- Main -->
+
+    <!-- =========================
+         Main Content
+    ========================== -->
     <main class="main">
 
-        <!-- Header -->
-        <div class="top-header-box">
-            <div class="header-left">
+        <!-- =========================
+             Mobile Top Bar
+        ========================== -->
+        <div class="mobile-topbar">
 
-                <div class="app-icon">☁️</div>
+            <a href="{% url 'dashboard' %}" class="mobile-logo">
+                🌱 AgroExpert
+            </a>
 
-                <div>
-                    <h3>AgroExpert Weather Forecast</h3>
-                    <p>Live weather insights for smarter farming</p>
+            <div class="mobile-profile-container">
+
+                <button
+                    type="button"
+                    class="mobile-profile"
+                    id="profileBtn"
+                >
+                    👤
+                </button>
+
+                <div
+                    class="profile-menu"
+                    id="profileMenu"
+                >
+
+                    <div class="profile-user">
+
+                        <div class="profile-avatar">
+                            👤
+                        </div>
+
+                        <div>
+                            <strong>{{ request.user.username }}</strong>
+                            <span>Farmer</span>
+                        </div>
+
+                    </div>
+
+                    <div class="profile-divider"></div>
+
+                    <a
+                        href="{% url 'logout' %}"
+                        class="profile-logout"
+                    >
+                        🚪 Logout
+                    </a>
+
                 </div>
 
             </div>
+
         </div>
 
-        <!-- Search Box -->
-        <div class="card">
 
-            <h2 class="title">5-Day Weather Forecast</h2>
+        <!-- =========================
+             Header
+        ========================== -->
+        <div class="top-header-box">
 
-            <div class="search">
-                <input id="cityInput" type="text" placeholder="Enter city name">
-                <button onclick="manualSearch()">Refresh Forecast</button>
+            <div class="header-left">
+
+                <div class="app-icon">
+                    ☁️
+                </div>
+
+                <div>
+                    <h3>
+                        AgroExpert Weather Forecast
+                    </h3>
+
+                    <p>
+                        Live weather insights for smarter farming
+                    </p>
+                </div>
+
             </div>
 
-            <div id="locationName" class="location"></div>
+        </div>
+
+
+        <!-- =========================
+             Search Box
+        ========================== -->
+        <div class="card">
+
+            <h2 class="title">
+                5-Day Weather Forecast
+            </h2>
+
+            <div class="search">
+
+                <input
+                    id="cityInput"
+                    type="text"
+                    placeholder="Enter city name"
+                >
+
+                <button onclick="manualSearch()">
+                    Refresh Forecast
+                </button>
+
+            </div>
+
+            <div
+                id="locationName"
+                class="location"
+            ></div>
 
         </div>
 
-        <!-- Forecast -->
+
+        <!-- =========================
+             Forecast
+        ========================== -->
         <div id="forecastContainer"></div>
 
     </main>
+
+
+    <!-- =========================
+         Mobile Bottom Navigation
+    ========================== -->
+    <nav class="mobile-nav">
+
+        <a href="{% url 'dashboard' %}">
+            <span class="nav-icon">🏠</span>
+            <span>Home</span>
+        </a>
+
+        <a href="{% url 'crop' %}">
+            <span class="nav-icon">🌾</span>
+            <span>Crop</span>
+        </a>
+
+        <a href="{% url 'soil_test' %}">
+            <span class="nav-icon">🧪</span>
+            <span>Soil</span>
+        </a>
+
+        <a
+            href="{% url 'weather' %}"
+            class="active"
+        >
+            <span class="nav-icon">☁️</span>
+            <span>Weather</span>
+        </a>
+
+        <a href="{% url 'fertilizer' %}">
+            <span class="nav-icon">🧴</span>
+            <span>Fertilizer</span>
+        </a>
+
+        <a href="{% url 'yield_prediction' %}">
+            <span class="nav-icon">📈</span>
+            <span>Yield</span>
+        </a>
+
+    </nav>
 
 </div>
 

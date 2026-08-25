@@ -14,40 +14,106 @@
 
 <div class="dashboard">
 
-    <!-- Sidebar -->
+    <!-- =========================
+         Desktop Sidebar
+    ========================== -->
     <aside class="sidebar">
 
         <a href="{% url 'dashboard' %}" class="logo">AgroExpert</a>
 
         <ul class="nav">
-            <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
-            <li><a href="{% url 'crop' %}">Crop Recommendation</a></li>
-            <li class="active"><a href="{% url 'soil_test' %}">Soil Test</a></li>
-            <li><a href="{% url 'weather' %}">Weather</a></li>
-            <li><a href="{% url 'fertilizer' %}">Fertilizer Recommendation</a></li>
-            <li><a href="{% url 'yield_prediction' %}">Yield Prediction</a></li>
+            <li>
+                <a href="{% url 'dashboard' %}">Dashboard</a>
+            </li>
+
+            <li>
+                <a href="{% url 'crop' %}">Crop Recommendation</a>
+            </li>
+
+            <li class="active">
+                <a href="{% url 'soil_test' %}">Soil Test</a>
+            </li>
+
+            <li>
+                <a href="{% url 'weather' %}">Weather</a>
+            </li>
+
+            <li>
+                <a href="{% url 'fertilizer' %}">Fertilizer Recommendation</a>
+            </li>
+
+            <li>
+                <a href="{% url 'yield_prediction' %}">Yield Prediction</a>
+            </li>
         </ul>
 
-        <!-- User -->
-        <div class="user-section">
-            <div class="user-info">
-                <div class="user-avatar">👤</div>
-                <p class="user-name">{{ request.user.username }}</p>
+        <!-- Desktop User -->
+        <div class="sidebar-bottom">
+
+            <div class="user-box">
+                <div class="avatar">👤</div>
+                <span>{{ request.user.username }}</span>
             </div>
 
-            <a href="{% url 'logout' %}" class="logout-btn">Logout</a>
+            <a href="{% url 'logout' %}" class="logout-btn">
+                Logout
+            </a>
+
         </div>
 
     </aside>
 
-    <!-- Main -->
+
+    <!-- =========================
+         Main Content
+    ========================== -->
     <main class="main">
+
+        <!-- Mobile Top Bar -->
+        <div class="mobile-topbar">
+
+            <a href="{% url 'dashboard' %}" class="mobile-logo">
+                🌱 AgroExpert
+            </a>
+
+            <div class="mobile-profile-container">
+
+            <button type="button" class="mobile-profile" id="profileBtn">
+                👤
+            </button>
+
+            <div class="profile-menu" id="profileMenu">
+
+                <div class="profile-user">
+                    <div class="profile-avatar">👤</div>
+
+                    <div>
+                        <strong>{{ request.user.username }}</strong>
+                        <span>Farmer</span>
+                    </div>
+                </div>
+
+                <div class="profile-divider"></div>
+
+                <a href="{% url 'logout' %}" class="profile-logout">
+                    🚪 Logout
+                </a>
+
+            </div>
+
+        </div>
+
+        </div>
+
 
         <!-- Header -->
         <div class="top-header-box">
+
             <div class="header-left">
 
-                <div class="app-icon">🧪</div>
+                <div class="app-icon">
+                    🧪
+                </div>
 
                 <div>
                     <h3>Soil Test Request</h3>
@@ -55,7 +121,9 @@
                 </div>
 
             </div>
+
         </div>
+
 
         <!-- Success Message -->
         {% if success %}
@@ -64,12 +132,20 @@
         </div>
         {% endif %}
 
-        <!-- Main Card -->
+
+        <!-- =========================
+             Main Card
+        ========================== -->
         <div class="content-card">
 
-            <h3 class="section-title">Select Testing Laboratory</h3>
+            <h3 class="section-title">
+                Select Testing Laboratory
+            </h3>
 
-            <!-- Labs -->
+
+            <!-- =========================
+                 Labs
+            ========================== -->
             <div class="lab-grid">
 
                 <div class="lab-card" data-lab="Lab Center 1">
@@ -130,13 +206,23 @@
 
             </div>
 
-            <!-- Form -->
+
+            <!-- =========================
+                 Form
+            ========================== -->
             <form method="POST" id="soilForm" class="form">
+
                 {% csrf_token %}
 
-                <input type="hidden" name="lab_name" id="labInput">
+                <input
+                    type="hidden"
+                    name="lab_name"
+                    id="labInput"
+                >
+
 
                 <label>Soil Type</label>
+
                 <select name="soil_type" required>
                     <option value="">Select soil type</option>
                     <option>Black Soil</option>
@@ -145,13 +231,29 @@
                     <option>Clay Soil</option>
                 </select>
 
+
                 <label>Appointment Date & Time</label>
-                <input type="datetime-local" name="appointment_date" required>
+
+                <input
+                    type="datetime-local"
+                    name="appointment_date"
+                    required
+                >
+
 
                 <label>Additional Notes</label>
-                <textarea name="notes" placeholder="Any special instructions or observations..."></textarea>
 
-                <button id="submitBtn" class="submit-btn" disabled>
+                <textarea
+                    name="notes"
+                    placeholder="Any special instructions or observations..."
+                ></textarea>
+
+
+                <button
+                    id="submitBtn"
+                    class="submit-btn"
+                    disabled
+                >
                     📩 Please select a lab
                 </button>
 
@@ -159,34 +261,89 @@
 
         </div>
 
-        <!-- History -->
+
+        <!-- =========================
+             History
+        ========================== -->
         <div class="history-card">
 
-            <h3 class="section-title">My Requests</h3>
+            <h3 class="section-title">
+                My Requests
+            </h3>
 
-            <table class="history-table">
+            <div class="table-wrapper">
 
-                <tr>
-                    <th>Lab</th>
-                    <th>Soil Type</th>
-                    <th>Date</th>
-                    <th>Status</th>
-                </tr>
+                <table class="history-table">
 
-                {% for item in history %}
-                <tr>
-                    <td>{{ item.lab_name }}</td>
-                    <td>{{ item.soil_type }}</td>
-                    <td>{{ item.appointment_date }}</td>
-                    <td>{{ item.status }}</td>
-                </tr>
-                {% endfor %}
+                    <thead>
+                        <tr>
+                            <th>Lab</th>
+                            <th>Soil Type</th>
+                            <th>Date</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
 
-            </table>
+                    <tbody>
+
+                        {% for item in history %}
+
+                        <tr>
+                            <td>{{ item.lab_name }}</td>
+                            <td>{{ item.soil_type }}</td>
+                            <td>{{ item.appointment_date }}</td>
+                            <td>{{ item.status }}</td>
+                        </tr>
+
+                        {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
 
         </div>
 
     </main>
+
+
+    <!-- =========================
+         Mobile Bottom Navigation
+    ========================== -->
+    <nav class="mobile-nav">
+
+        <a href="{% url 'dashboard' %}">
+            <span class="nav-icon">🏠</span>
+            <span>Home</span>
+        </a>
+
+        <a href="{% url 'crop' %}">
+            <span class="nav-icon">🌾</span>
+            <span>Crop</span>
+        </a>
+
+        <a href="{% url 'soil_test' %}" class="active">
+            <span class="nav-icon">🧪</span>
+            <span>Soil</span>
+        </a>
+
+        <a href="{% url 'weather' %}">
+            <span class="nav-icon">☁️</span>
+            <span>Weather</span>
+        </a>
+
+        <a href="{% url 'fertilizer' %}">
+            <span class="nav-icon">🧴</span>
+            <span>Fertilizer</span>
+        </a>
+
+        <a href="{% url 'yield_prediction' %}">
+            <span class="nav-icon">📈</span>
+            <span>Yield</span>
+        </a>
+
+    </nav>
 
 </div>
 

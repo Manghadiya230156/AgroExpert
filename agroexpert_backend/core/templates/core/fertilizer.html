@@ -14,7 +14,9 @@
 
 <div class="dashboard">
 
-    <!-- Sidebar -->
+    <!-- =========================
+         Desktop Sidebar
+    ========================== -->
     <aside class="sidebar">
 
         <a href="{% url 'dashboard' %}" class="logo">AgroExpert</a>
@@ -28,7 +30,7 @@
             <li><a href="{% url 'yield_prediction' %}">Yield Prediction</a></li>
         </ul>
 
-        <!-- Bottom User -->
+        <!-- Desktop User -->
         <div class="sidebar-bottom">
 
             <div class="user-box">
@@ -36,21 +38,75 @@
                 <span>{{ request.user.username }}</span>
             </div>
 
-            <a href="{% url 'logout' %}" class="logout-btn">Logout</a>
+            <a href="{% url 'logout' %}" class="logout-btn">
+                Logout
+            </a>
 
         </div>
 
     </aside>
 
-    <!-- Main -->
+
+    <!-- =========================
+         Main Content
+    ========================== -->
     <main class="main">
 
-        <!-- Header -->
+        <!-- =========================
+             Mobile Top Bar
+        ========================== -->
+        <div class="mobile-topbar">
+
+            <a href="{% url 'dashboard' %}" class="mobile-logo">
+                🌱 AgroExpert
+            </a>
+
+            <div class="mobile-profile-container">
+
+                <button type="button"
+                        class="mobile-profile"
+                        id="profileBtn">
+                    👤
+                </button>
+
+                <div class="profile-menu" id="profileMenu">
+
+                    <div class="profile-user">
+
+                        <div class="profile-avatar">
+                            👤
+                        </div>
+
+                        <div>
+                            <strong>{{ request.user.username }}</strong>
+                            <span>Farmer</span>
+                        </div>
+
+                    </div>
+
+                    <div class="profile-divider"></div>
+
+                    <a href="{% url 'logout' %}" class="profile-logout">
+                        🚪 Logout
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- =========================
+             Header
+        ========================== -->
         <div class="top-header-box">
 
             <div class="header-left">
 
-                <div class="app-icon">🧪</div>
+                <div class="app-icon">
+                    🧪
+                </div>
 
                 <div>
                     <h3>AgroExpert Fertilizer Recommendation</h3>
@@ -61,29 +117,45 @@
 
         </div>
 
-        <!-- Input Card -->
+
+        <!-- =========================
+             Input Card
+        ========================== -->
         <div class="card input-card">
 
             <h2>Soil & Environment Parameters</h2>
 
             <form method="POST">
+
                 {% csrf_token %}
 
                 <div class="form-grid">
 
                     <div>
                         <label>Temperature (0 - 38°C)</label>
-                        <input type="number" name="temperature" min="0" max="38" required>
+                        <input type="number"
+                               name="temperature"
+                               min="0"
+                               max="38"
+                               required>
                     </div>
 
                     <div>
                         <label>Humidity (50 - 95%)</label>
-                        <input type="number" name="humidity" min="50" max="95" required>
+                        <input type="number"
+                               name="humidity"
+                               min="50"
+                               max="95"
+                               required>
                     </div>
 
                     <div>
                         <label>Moisture (25 - 65)</label>
-                        <input type="number" name="moisture" min="25" max="65" required>
+                        <input type="number"
+                               name="moisture"
+                               min="25"
+                               max="65"
+                               required>
                     </div>
 
                     <div>
@@ -124,17 +196,29 @@
 
                     <div>
                         <label>Nitrogen (0 - 126)</label>
-                        <input type="number" name="nitrogen" min="0" max="126" required>
+                        <input type="number"
+                               name="nitrogen"
+                               min="0"
+                               max="126"
+                               required>
                     </div>
 
                     <div>
                         <label>Phosphorous (0 - 54)</label>
-                        <input type="number" name="phosphorous" min="0" max="54" required>
+                        <input type="number"
+                               name="phosphorous"
+                               min="0"
+                               max="54"
+                               required>
                     </div>
 
                     <div>
                         <label>Potassium (0 - 59)</label>
-                        <input type="number" name="potassium" min="0" max="59" required>
+                        <input type="number"
+                               name="potassium"
+                               min="0"
+                               max="59"
+                               required>
                     </div>
 
                 </div>
@@ -153,7 +237,10 @@
 
         </div>
 
-        <!-- Output Grid -->
+
+        <!-- =========================
+             Output Grid
+        ========================== -->
         <div class="output-grid">
 
             <!-- Recommendation -->
@@ -162,7 +249,11 @@
                 <h3>Recommendation</h3>
 
                 <div class="recommend-box">
-                    <div class="emoji">🧪</div>
+
+                    <div class="emoji">
+                        🧪
+                    </div>
+
                     <h4>Recommended Fertilizer</h4>
 
                     <div class="crop-name">
@@ -173,59 +264,118 @@
                         {% endif %}
                     </div>
 
-                    <p>Best nutrient match for your soil condition</p>
+                    <p>
+                        Best nutrient match for your soil condition
+                    </p>
+
                 </div>
 
             </div>
+
 
             <!-- History -->
             <div class="card recent-card">
 
                 <h3>Recent Recommendations</h3>
 
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Date</th>
-                            <th>Fertilizer</th>
-                            <th>N</th>
-                            <th>P</th>
-                            <th>K</th>
-                        </tr>
-                    </thead>
+                <div class="table-wrapper">
 
-                    <tbody>
+                    <table>
 
-                        {% for row in history %}
-                        <tr>
-                            <td>{{ row.created_at|date:"d M Y H:i" }}</td>
-                            <td>{{ row.prediction }}</td>
-                            <td>{{ row.nitrogen }}</td>
-                            <td>{{ row.phosphorous }}</td>
-                            <td>{{ row.potassium }}</td>
-                        </tr>
-                        {% empty %}
-                        <tr>
-                            <td colspan="5">No history yet</td>
-                        </tr>
-                        {% endfor %}
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Fertilizer</th>
+                                <th>N</th>
+                                <th>P</th>
+                                <th>K</th>
+                            </tr>
+                        </thead>
 
-                    </tbody>
-                </table>
+                        <tbody>
+
+                            {% for row in history %}
+
+                            <tr>
+                                <td>{{ row.created_at|date:"d M Y H:i" }}</td>
+                                <td>{{ row.prediction }}</td>
+                                <td>{{ row.nitrogen }}</td>
+                                <td>{{ row.phosphorous }}</td>
+                                <td>{{ row.potassium }}</td>
+                            </tr>
+
+                            {% empty %}
+
+                            <tr>
+                                <td colspan="5">
+                                    No history yet
+                                </td>
+                            </tr>
+
+                            {% endfor %}
+
+                        </tbody>
+
+                    </table>
+
+                </div>
 
             </div>
 
+
             <!-- Chart -->
             <div class="card trend-card">
+
                 <h3>Recommendation Trends</h3>
+
                 <canvas id="trendChart"></canvas>
+
             </div>
 
         </div>
 
     </main>
 
+
+    <!-- =========================
+         Mobile Bottom Navigation
+    ========================== -->
+    <nav class="mobile-nav">
+
+        <a href="{% url 'dashboard' %}">
+            <span class="nav-icon">🏠</span>
+            <span>Home</span>
+        </a>
+
+        <a href="{% url 'crop' %}">
+            <span class="nav-icon">🌾</span>
+            <span>Crop</span>
+        </a>
+
+        <a href="{% url 'soil_test' %}">
+            <span class="nav-icon">🧪</span>
+            <span>Soil</span>
+        </a>
+
+        <a href="{% url 'weather' %}">
+            <span class="nav-icon">☁️</span>
+            <span>Weather</span>
+        </a>
+
+        <a href="{% url 'fertilizer' %}" class="active">
+            <span class="nav-icon">🧴</span>
+            <span>Fertilizer</span>
+        </a>
+
+        <a href="{% url 'yield_prediction' %}">
+            <span class="nav-icon">📈</span>
+            <span>Yield</span>
+        </a>
+
+    </nav>
+
 </div>
+
 
 <script src="{% static 'core/js/fertilizer.js' %}"></script>
 
