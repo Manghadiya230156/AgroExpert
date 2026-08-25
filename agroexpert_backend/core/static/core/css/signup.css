@@ -159,3 +159,119 @@ body {
     font-size: 13px;
     color: #64748b;
 }
+
+
+/* =========================
+   TABLET / MOBILE
+========================= */
+
+@media (max-width: 768px) {
+
+    .page {
+        padding: 20px;
+    }
+
+    .brand {
+        margin-bottom: 25px;
+    }
+
+    .brand h1 {
+        font-size: 34px;
+        line-height: 1.2;
+    }
+
+    .brand p {
+        font-size: 14px;
+    }
+
+    .card {
+        max-width: 520px;
+    }
+
+    .card-head {
+        padding: 25px 20px;
+    }
+
+    .card-head h2 {
+        font-size: 22px;
+    }
+
+    .form {
+        padding: 28px 25px;
+    }
+}
+
+
+/* =========================
+   SMALL MOBILE
+========================= */
+
+@media (max-width: 480px) {
+
+    .page {
+        padding: 15px;
+    }
+
+    .brand {
+        margin-bottom: 20px;
+    }
+
+    .brand h1 {
+        font-size: 29px;
+        line-height: 1.2;
+    }
+
+    .brand p {
+        font-size: 13px;
+    }
+
+    .card {
+        width: 100%;
+        border-radius: 16px;
+    }
+
+    .card-head {
+        padding: 22px 16px;
+    }
+
+    .card-head h2 {
+        font-size: 21px;
+    }
+
+    .card-head p {
+        font-size: 13px;
+    }
+
+    .form {
+        padding: 24px 18px;
+    }
+
+    .field {
+        margin-bottom: 16px;
+    }
+
+    .field label {
+        font-size: 13px;
+    }
+
+    .field input,
+    .field select {
+        padding: 11px 12px;
+        font-size: 14px;
+    }
+
+    .btn {
+        padding: 13px;
+        font-size: 15px;
+    }
+
+    .switch {
+        font-size: 13px;
+    }
+
+    .footer {
+        margin-top: 22px;
+        font-size: 12px;
+        text-align: center;
+    }
+}

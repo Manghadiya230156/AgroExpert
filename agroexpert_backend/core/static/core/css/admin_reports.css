@@ -95,3 +95,163 @@ box-shadow:0 8px 20px rgba(0,0,0,.05);
 .sidebar li {
     list-style: none;
 }
+
+/* =========================
+   TABLET
+========================= */
+
+@media (max-width: 768px){
+
+    .sidebar{
+        width:210px;
+        padding:25px 20px;
+    }
+
+    .main{
+        padding:30px 20px;
+    }
+
+    .cards{
+        grid-template-columns:repeat(2,1fr);
+        gap:15px;
+    }
+
+    .card{
+        padding:20px;
+    }
+
+    .card p{
+        font-size:26px;
+    }
+
+    .chart-box{
+        padding:20px;
+        overflow-x:auto;
+    }
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 600px){
+
+    .dashboard{
+        flex-direction:column;
+        min-height:100vh;
+    }
+
+    .sidebar{
+        width:100%;
+        padding:15px;
+        border-right:none;
+        border-bottom:1px solid #ddd;
+    }
+
+    .sidebar h2{
+        margin-bottom:15px;
+        text-align:center;
+    }
+
+    .sidebar ul{
+        display:flex;
+        flex-wrap:wrap;
+        justify-content:center;
+        gap:5px;
+    }
+
+    .sidebar li{
+        margin:0;
+    }
+
+    .sidebar a{
+        display:block;
+        padding:9px 12px;
+        margin:0;
+        font-size:14px;
+        white-space:nowrap;
+    }
+
+    .main{
+        width:100%;
+        padding:25px 15px;
+    }
+
+    h1{
+        font-size:26px;
+        margin-bottom:20px;
+    }
+
+    .cards{
+        grid-template-columns:1fr;
+        gap:15px;
+        margin-bottom:20px;
+    }
+
+    .card{
+        padding:20px;
+    }
+
+    .card h3{
+        font-size:15px;
+    }
+
+    .card p{
+        font-size:26px;
+    }
+
+    .chart-box{
+        width:100%;
+        padding:15px;
+        overflow-x:auto;
+    }
+}
+
+
+/* =========================
+   SMALL MOBILE
+========================= */
+
+@media (max-width:480px){
+
+    .sidebar{
+        padding:12px 10px;
+    }
+
+    .sidebar h2{
+        font-size:20px;
+        margin-bottom:12px;
+    }
+
+    .sidebar ul{
+        gap:4px;
+    }
+
+    .sidebar a{
+        padding:8px 10px;
+        font-size:13px;
+    }
+
+    .main{
+        padding:20px 12px;
+    }
+
+    h1{
+        font-size:23px;
+    }
+
+    .card{
+        padding:18px;
+        border-radius:12px;
+    }
+
+    .card p{
+        font-size:24px;
+    }
+
+    .chart-box{
+        padding:12px;
+        border-radius:12px;
+    }
+}

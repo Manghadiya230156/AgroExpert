@@ -331,19 +331,184 @@ body{
         grid-column:span 1;
     }
 }
+/* ================= Responsive ================= */
 
 @media(max-width:768px){
 
+    /* Hide desktop sidebar on tablet/mobile */
     .sidebar{
         display:none;
     }
 
+    /* Full width main content */
     .main{
         margin-left:0;
         width:100%;
+        height:100vh;
+        padding:20px 15px;
+        overflow-y:auto;
+    }
+
+    /* Header */
+    .top-header-box{
+        padding:15px;
+        margin-bottom:20px;
+        gap:15px;
+    }
+
+    .header-left{
+        gap:12px;
+    }
+
+    .app-icon{
+        width:38px;
+        height:38px;
+        font-size:20px;
+        flex-shrink:0;
+    }
+
+    .header-left h3{
+        font-size:18px;
+    }
+
+    .header-left p{
+        font-size:13px;
+    }
+
+    /* Main card */
+    .card{
+        width:100%;
+        max-width:none;
+        padding:25px 20px;
+    }
+
+    /* Form */
+    .form-grid{
+        grid-template-columns:1fr;
+        gap:16px;
+    }
+
+    .form-grid .full{
+        grid-column:span 1;
+    }
+
+    /* Output */
+    .output-grid{
+        grid-template-columns:1fr;
+        gap:20px;
+    }
+
+    .recommendation-card{
+        grid-column:span 1;
+    }
+
+    .recommend-box{
+        padding:20px 15px;
+    }
+
+    .crop-name{
+        font-size:24px;
+    }
+
+    /* Tables */
+    .recent-card{
+        width:100%;
+        overflow:hidden;
+    }
+
+    .recent-card table{
+        display:block;
+        width:100%;
+        overflow-x:auto;
+        white-space:nowrap;
+    }
+
+    .recent-card th,
+    .recent-card td{
+        padding:9px;
+        font-size:13px;
+    }
+
+    /* Chart */
+    .trend-card{
+        width:100%;
+        overflow:hidden;
+    }
+
+    .trend-card canvas{
+        max-width:100%;
+    }
+}
+
+
+/* ================= Small Mobile ================= */
+
+@media(max-width:480px){
+
+    .main{
+        padding:15px 10px;
+    }
+
+    .top-header-box{
+        padding:13px;
+        border-radius:12px;
+        margin-bottom:15px;
+    }
+
+    .header-left{
+        gap:10px;
+    }
+
+    .app-icon{
+        width:34px;
+        height:34px;
+        font-size:18px;
+    }
+
+    .header-left h3{
+        font-size:16px;
+    }
+
+    .header-left p{
+        font-size:12px;
     }
 
     .card{
-        padding:25px;
+        padding:20px 15px;
+        border-radius:13px;
+    }
+
+    .form-grid{
+        gap:14px;
+        margin-top:15px;
+    }
+
+    .form-grid label{
+        font-size:13px;
+    }
+
+    .form-grid input,
+    .form-grid select{
+        padding:10px;
+        font-size:13px;
+    }
+
+    .predict-btn{
+        padding:12px;
+        font-size:15px;
+    }
+
+    .recommend-box{
+        padding:18px 12px;
+    }
+
+    .crop-name{
+        font-size:22px;
+    }
+
+    .recent-card th,
+    .recent-card td{
+        padding:8px;
+        font-size:12px;
     }
 }

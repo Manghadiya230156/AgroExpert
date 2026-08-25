@@ -341,23 +341,222 @@ body{
 /* =========================
    Responsive
 ========================= */
+/* =========================
+   Responsive
+========================= */
+
 @media(max-width:768px){
 
+    /* Hide desktop sidebar */
     .sidebar{
         display:none;
     }
 
+    /* Full-width mobile main */
     .main{
         margin-left:0;
         width:100%;
-        padding:20px;
+        height:100vh;
+        padding:20px 15px;
+        overflow-y:auto;
+        overflow-x:hidden;
     }
 
+    /* Header */
+    .top-header-box{
+        padding:15px;
+        margin-bottom:20px;
+    }
+
+    .header-left{
+        gap:12px;
+    }
+
+    .app-icon{
+        width:38px;
+        height:38px;
+        font-size:20px;
+        flex-shrink:0;
+    }
+
+    .header-left h3{
+        font-size:18px;
+        line-height:1.3;
+    }
+
+    .header-left p{
+        font-size:13px;
+    }
+
+    /* Main cards */
+    .card{
+        padding:22px 18px;
+        border-radius:15px;
+        margin-bottom:20px;
+    }
+
+    .title{
+        font-size:20px;
+        margin-bottom:18px;
+    }
+
+    /* Search */
     .search{
         flex-direction:column;
+        gap:10px;
+    }
+
+    .search input{
+        width:100%;
+        padding:12px;
     }
 
     .search button{
         width:100%;
+        padding:12px;
+    }
+
+    .location{
+        font-size:14px;
+    }
+
+    /* Forecast day */
+    .day-card{
+        padding:20px 15px;
+        border-radius:15px;
+        margin-bottom:20px;
+    }
+
+    .day-title{
+        font-size:17px;
+        margin-bottom:15px;
+    }
+
+    /* Weather time cards */
+    .time-grid{
+        grid-template-columns:repeat(2,1fr);
+        gap:12px;
+    }
+
+    .time-card{
+        padding:15px 10px;
+        border-radius:12px;
+    }
+
+    .time{
+        font-size:13px;
+    }
+
+    .weather-symbol{
+        font-size:30px;
+    }
+
+    .temp{
+        font-size:20px;
+    }
+
+    .desc{
+        font-size:12px;
+    }
+
+    .details{
+        font-size:12px;
+    }
+}
+
+
+/* =========================
+   Small Mobile
+========================= */
+
+@media(max-width:480px){
+
+    .main{
+        padding:15px 10px;
+    }
+
+    .top-header-box{
+        padding:13px;
+        border-radius:12px;
+        margin-bottom:15px;
+    }
+
+    .header-left{
+        gap:9px;
+    }
+
+    .app-icon{
+        width:34px;
+        height:34px;
+        font-size:18px;
+    }
+
+    .header-left h3{
+        font-size:16px;
+    }
+
+    .header-left p{
+        font-size:12px;
+    }
+
+    .card{
+        padding:18px 14px;
+        border-radius:13px;
+    }
+
+    .title{
+        font-size:18px;
+    }
+
+    .search input{
+        padding:10px;
+        font-size:13px;
+    }
+
+    .search button{
+        padding:11px;
+        font-size:14px;
+    }
+
+    .location{
+        font-size:13px;
+    }
+
+    .day-card{
+        padding:17px 12px;
+        border-radius:13px;
+    }
+
+    .day-title{
+        font-size:16px;
+    }
+
+    .time-grid{
+        grid-template-columns:1fr;
+        gap:10px;
+    }
+
+    .time-card{
+        padding:15px;
+    }
+
+    .time{
+        font-size:13px;
+    }
+
+    .weather-symbol{
+        font-size:28px;
+    }
+
+    .temp{
+        font-size:19px;
+    }
+
+    .desc{
+        font-size:12px;
+    }
+
+    .details{
+        font-size:12px;
     }
 }
