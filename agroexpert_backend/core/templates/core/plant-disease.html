@@ -1,0 +1,117 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plant Disease Detection | AgroExpert</title>
+    <link rel="stylesheet" href="{% static 'core/css/crop.css' %}">
+    <link rel="stylesheet" href="{% static 'core/css/plant-disease.css' %}">
+</head>
+<body>
+<div class="dashboard">
+    <aside class="sidebar">
+        <a href="{% url 'home' %}" class="logo">AgroExpert</a>
+        <ul class="nav">
+            <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
+            <li><a href="{% url 'crop' %}">Crop Recommendation</a></li>
+            <li><a href="{% url 'soil_test' %}">Soil Test</a></li>
+            <li><a href="{% url 'weather' %}">Weather</a></li>
+            <li><a href="{% url 'fertilizer' %}">Fertilizer Recommendation</a></li>
+            <li class="active"><a href="{% url 'plant_disease_detection' %}">Plant Disease Detection</a></li>
+            <li><a href="{% url 'market_prices' %}">Market Prices</a></li>
+        </ul>
+        <div class="sidebar-bottom">
+            <div class="user-box"><div class="avatar">👤</div><span>{{ request.user.username }}</span></div>
+            <a href="{% url 'logout' %}" class="logout-btn">Logout</a>
+        </div>
+    </aside>
+
+    <header class="mobile-topbar">
+        <a href="{% url 'dashboard' %}" class="mobile-logo">🌱 AgroExpert</a>
+        <button class="profile-btn" id="profileBtn" type="button">👤</button>
+        <div class="profile-menu" id="profileMenu">
+            <div class="profile-user"><div class="profile-avatar">👤</div><div><strong>{{ request.user.username }}</strong><span>Farmer</span></div></div>
+            <a href="{% url 'logout' %}" class="mobile-logout">Logout</a>
+        </div>
+    </header>
+
+    <main class="main">
+        <div class="top-header-box">
+            <div class="header-left"><div class="app-icon">🌿</div><div><h3>Plant Disease Detection</h3><p>AI-assisted leaf screening, explanations, and prevention guidance</p></div></div>
+        </div>
+
+        <section class="card disease-intro">
+            <div><span class="eyebrow">SMART CROP CARE</span><h1>Check a leaf for disease</h1><p>Upload a clear photo of one crop leaf. AgroExpert will compare it with patterns learned from a public plant-leaf dataset and show a likely class with general prevention guidance.</p></div>
+            <div class="intro-icon" aria-hidden="true">🍃</div>
+        </section>
+
+        {% if error %}<div class="disease-alert" role="alert">{{ error }}</div>{% endif %}
+
+        <section class="card upload-card">
+            <div class="section-heading"><div><h2>Upload leaf image</h2><p>JPG, JPEG or PNG · maximum 8 MB</p></div><span class="step-number">01</span></div>
+            <form method="post" enctype="multipart/form-data" id="diseaseForm">
+                {% csrf_token %}
+                <label class="dropzone" for="leaf_image">
+                    <span class="upload-symbol">↑</span>
+                    <strong id="fileTitle">Choose a leaf photo</strong>
+                    <span id="fileHint">Click to browse files from your device</span>
+                    <input type="file" name="leaf_image" id="leaf_image" accept="image/jpeg,image/png,.jpg,.jpeg,.png" required>
+                </label>
+                <div class="image-preview-wrap" id="previewWrap" hidden><img id="imagePreview" alt="Selected leaf preview"><button type="button" id="clearImage" class="clear-image">Remove image</button></div>
+                <button type="submit" class="predict-btn">🔍 Analyze Leaf</button>
+            </form>
+        </section>
+
+        {% if result %}
+        <section class="card result-card" aria-live="polite">
+            <div class="section-heading"><div><h2>Analysis result</h2><p>Model output for your uploaded image</p></div><span class="step-number">02</span></div>
+            <div class="result-summary {% if result.healthy %}healthy{% else %}disease{% endif %}">
+                <div class="result-mark">{% if result.healthy %}✓{% else %}!{% endif %}</div>
+                <div class="result-main"><span class="result-kicker">LIKELY CLASS · {{ result.crop }}</span><h3>{{ result.condition }}</h3><p>{{ result.confidence }}% model confidence score</p></div>
+                <div class="confidence-track"><span style="width: {{ result.confidence }}%"></span></div>
+            </div>
+            <p class="confidence-note">{{ result.confidence_note }}</p>
+            <div class="guidance-grid">
+                <article class="guidance-panel"><div class="guidance-icon">🔎</div><h3>What it means</h3><p>{{ result.explanation }}</p></article>
+                <article class="guidance-panel prevention-panel"><div class="guidance-icon">🛡️</div><h3>Prevention and next steps</h3><ul>{% for item in result.prevention %}<li>{{ item }}</li>{% endfor %}</ul></article>
+            </div>
+            <div class="medical-disclaimer"><strong>Important:</strong> This is an educational screening tool, not a definitive diagnosis. PlantVillage images are largely captured in controlled conditions, so performance may be lower on real farm photos. Confirm uncertain results with a local agricultural expert before taking action or applying chemicals.</div>
+        </section>
+        {% endif %}
+
+        <section class="tips-grid">
+            <article class="card tip-card"><span>📸</span><h3>Take a clear photo</h3><p>Keep the leaf in focus, use natural light, and avoid strong shadows or filters.</p></article>
+            <article class="card tip-card"><span>🍃</span><h3>Show one leaf</h3><p>Fill most of the frame with the leaf and include visible spots or discolouration.</p></article>
+            <article class="card tip-card"><span>👩‍🌾</span><h3>Check before treating</h3><p>Different diseases can look alike. Use this result as a starting point, not as a pesticide prescription.</p></article>
+        </section>
+    </main>
+</div>
+<script>
+const fileInput = document.getElementById('leaf_image');
+const previewWrap = document.getElementById('previewWrap');
+const preview = document.getElementById('imagePreview');
+const fileTitle = document.getElementById('fileTitle');
+const fileHint = document.getElementById('fileHint');
+fileInput.addEventListener('change', () => {
+    const file = fileInput.files && fileInput.files[0];
+    if (!file) return;
+    fileTitle.textContent = file.name;
+    fileHint.textContent = `${(file.size / (1024 * 1024)).toFixed(2)} MB selected`;
+    if (preview.src.startsWith('blob:')) URL.revokeObjectURL(preview.src);
+    preview.src = URL.createObjectURL(file);
+    previewWrap.hidden = false;
+});
+document.getElementById('clearImage').addEventListener('click', () => {
+    fileInput.value = '';
+    if (preview.src.startsWith('blob:')) URL.revokeObjectURL(preview.src);
+    preview.removeAttribute('src');
+    previewWrap.hidden = true;
+    fileTitle.textContent = 'Choose a leaf photo';
+    fileHint.textContent = 'Click to browse files from your device';
+});
+const profileBtn = document.getElementById('profileBtn');
+if (profileBtn) profileBtn.addEventListener('click', () => document.getElementById('profileMenu').classList.toggle('show'));
+</script>
+</body>
+</html>

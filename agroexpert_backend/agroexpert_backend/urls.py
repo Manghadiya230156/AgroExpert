@@ -25,6 +25,7 @@ from django.urls import path, include
 from core import views
 
 urlpatterns = [
+    path('i18n/', include('django.conf.urls.i18n')), 
     path('admin/', admin.site.urls),
 
     path('', views.home, name='home'),

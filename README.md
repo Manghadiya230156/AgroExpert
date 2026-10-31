@@ -65,3 +65,8 @@ python manage.py runserver
 - Man Ghadiya
 - Hemal Parmar
 
+
+
+## New: Plant Disease Detection (7th-semester minor-project extension)
+
+A new authenticated `/plant-disease/` page lets users upload a crop-leaf photo and receive a MobileNetV3-Small class prediction with explanation and general prevention guidance. The trained model is not included because the public dataset is large; see `ml_models/plant_disease/README.md` to download PlantVillage and train it. Until training produces `plant_disease_model.pth` and `plant_disease_classes.json`, the page intentionally shows a setup message instead of a fake prediction.

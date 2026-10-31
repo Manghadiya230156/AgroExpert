@@ -1,19 +1,43 @@
+
+# Python cache
 __pycache__/
 *.py[cod]
+*$py.class
+
+# Django database
 *.sqlite3
 db.sqlite3
 
-.ipynb_checkpoints/
+# Environment and secrets
+.env
+.env.*
+!.env.example
 
+# Virtual environments
 venv/
 env/
+.venv/
 
+# Jupyter
+.ipynb_checkpoints/
+
+# Django generated files
 media/
 staticfiles/
 
+# ML training outputs
 catboost_info/
-
 *.log
 
+# IDE
+.vscode/
+.idea/
+
+# OS generated files
 .DS_Store
 Thumbs.db
+
+# Python packaging
+build/
+dist/
+*.egg-info/

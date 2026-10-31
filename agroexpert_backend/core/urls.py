@@ -43,7 +43,7 @@
 #     path('crop/', views.crop_page, name='crop'),
 #     path('soil-test/', views.soil_test, name='soil_test'),
 #     path('weather/', views.weather, name='weather'),
-#     path('yield/', views.yield_prediction, name='yield_prediction'),
+#
 #     path('fertilizer/', views.fertilizer, name='fertilizer'),
 # ]
 
@@ -54,7 +54,7 @@ from . import views
 
 urlpatterns = [
     path('', views.home, name='home'),
-
+    
     path('login/', views.login_view, name='login'),
     path('signup/', views.signup, name='signup'),
     path('logout/', views.logout_view, name='logout'),
@@ -67,7 +67,9 @@ urlpatterns = [
     path('soil-test/', views.soil_test, name='soil_test'),
     path('weather/', views.weather, name='weather'),
     path('fertilizer/', views.fertilizer, name='fertilizer'),
-    path('yield/', views.yield_prediction, name='yield_prediction'),
+    path('plant-disease/', views.plant_disease_detection, name='plant_disease_detection'),
+    path('market-prices/', views.market_prices, name='market_prices'),
+    path('market-prices/districts/', views.market_price_districts, name='market_price_districts'),
     path("admin-dashboard/", views.admin_dashboard, name="admin_dashboard"),
     path("admin-users/", views.admin_users, name="admin_users"),
     path("delete-user/<int:user_id>/", views.delete_user, name="delete_user"),

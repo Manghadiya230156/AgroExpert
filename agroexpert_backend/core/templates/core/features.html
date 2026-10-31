@@ -56,12 +56,9 @@
                 </a>
             </li>
 
-            <li>
-                <a href="{% url 'yield_prediction' %}">
-                    Yield Prediction
-                </a>
-            </li>
-
+        
+            <li><a href="{% url 'plant_disease_detection' %}">Plant Disease Detection</a></li>
+            <li><a href="{% url 'market_prices' %}">Market Prices</a></li>
         </ul>
 
         <!-- Desktop User -->
@@ -214,20 +211,13 @@
             </a>
 
 
-            <a href="{% url 'yield_prediction' %}" class="card">
+            <a href="{% url 'plant_disease_detection' %}" class="card">
 
-                <div class="icon">
-                    📈
-                </div>
+                <div class="icon">🌿</div>
 
                 <div>
-                    <h4>
-                        Yield Prediction
-                    </h4>
-
-                    <p>
-                        Estimate your expected crop production.
-                    </p>
+                    <h4>Plant Disease Detection</h4>
+                    <p>Upload a leaf photo to screen for common crop diseases and view prevention guidance.</p>
                 </div>
 
             </a>
@@ -249,6 +239,14 @@
                     </p>
                 </div>
 
+            </a>
+
+            <a href="{% url 'market_prices' %}" class="card market-price-card">
+                <div class="icon">₹</div>
+                <div>
+                    <h4>Market Price Insights</h4>
+                    <p>Compare official mandi prices for Gujarat and other states across crops such as cotton, groundnut, rice and wheat.</p>
+                </div>
             </a>
 
         </div>

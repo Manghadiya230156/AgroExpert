@@ -139,3 +139,15 @@ class SoilTestRequest(models.Model):
 
     def __str__(self):
         return self.user.username
+
+class MarketPriceSnapshot(models.Model):
+    """Database-backed response cache for a specific market-price filter set."""
+    cache_key = models.CharField(max_length=64, unique=True, db_index=True)
+    filters = models.JSONField(default=dict, blank=True)
+    payload = models.JSONField(default=list, blank=True)
+    fetched_at = models.DateTimeField(auto_now=True)
+    reporting_date = models.DateField(null=True, blank=True)
+    source_title = models.CharField(max_length=255, blank=True, default="AGMARKNET / data.gov.in")
+
+    def __str__(self):
+        return f"Market prices cache {self.cache_key[:10]}"

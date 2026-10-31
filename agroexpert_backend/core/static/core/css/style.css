@@ -476,3 +476,70 @@ padding-top:15px;
         padding:45px 15px 15px;
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Language Selector */
+.language-menu {
+    display: flex;
+    align-items: center;
+    margin-left: 12px;
+}
+
+.language-menu form {
+    margin: 0;
+}
+
+.language-menu select {
+    padding: 9px 12px;
+    border: 1px solid rgba(255, 255, 255, 0.7);
+    border-radius: 8px;
+    background: #ffffff;
+    color: #198b3b;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    outline: none;
+}
+
+.language-menu select:focus {
+    border-color: #145c2b;
+}
+
+@media (max-width: 768px) {
+    .language-menu {
+        margin: 8px 0;
+    }
+}

@@ -27,7 +27,9 @@
             <li><a href="{% url 'soil_test' %}">Soil Test</a></li>
             <li><a href="{% url 'weather' %}">Weather</a></li>
             <li class="active"><a href="{% url 'fertilizer' %}">Fertilizer Recommendation</a></li>
-            <li><a href="{% url 'yield_prediction' %}">Yield Prediction</a></li>
+            <li><a href="{% url 'plant_disease_detection' %}">Plant Disease Detection</a></li>
+            <li><a href="{% url 'market_prices' %}">Market Prices</a></li>
+
         </ul>
 
         <!-- Desktop User -->
@@ -367,12 +369,12 @@
             <span>Fertilizer</span>
         </a>
 
-        <a href="{% url 'yield_prediction' %}">
-            <span class="nav-icon">📈</span>
-            <span>Yield</span>
+    
+        <a href="{% url 'plant_disease_detection' %}">
+            <span class="nav-icon">🌿</span>
+            <span>Disease</span>
         </a>
-
-    </nav>
+</nav>
 
 </div>
 

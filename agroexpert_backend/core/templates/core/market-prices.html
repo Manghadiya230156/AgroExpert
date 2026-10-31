@@ -1,0 +1,100 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Market Prices | AgroExpert</title>
+  <link rel="stylesheet" href="{% static 'core/css/crop.css' %}">
+  <link rel="stylesheet" href="{% static 'core/css/market-prices.css' %}">
+</head>
+<body>
+<div class="dashboard">
+  <aside class="sidebar">
+    <a href="{% url 'home' %}" class="logo">AgroExpert</a>
+    <ul class="nav">
+      <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
+      <li><a href="{% url 'crop' %}">Crop Recommendation</a></li>
+      <li><a href="{% url 'soil_test' %}">Soil Test</a></li>
+      <li><a href="{% url 'weather' %}">Weather</a></li>
+      <li><a href="{% url 'fertilizer' %}">Fertilizer Recommendation</a></li>
+      <li><a href="{% url 'plant_disease_detection' %}">Plant Disease Detection</a></li>
+      <li class="active"><a href="{% url 'market_prices' %}">Market Prices</a></li>
+    </ul>
+    <div class="sidebar-bottom"><div class="user-box"><div class="avatar">👤</div><span>{{ request.user.username }}</span></div><a href="{% url 'logout' %}" class="logout-btn">Logout</a></div>
+  </aside>
+  <header class="mobile-topbar"><a href="{% url 'dashboard' %}" class="mobile-logo">🌱 AgroExpert</a><button class="profile-btn" id="profileBtn" type="button">👤</button><div class="profile-menu" id="profileMenu"><div class="profile-user"><strong>{{ request.user.username }}</strong></div><a href="{% url 'logout' %}" class="mobile-logout">Logout</a></div></header>
+  <main class="main market-main">
+    <div class="top-header-box"><div class="header-left"><div class="app-icon">₹</div><div><h3>Market Price Insights</h3><p>Daily wholesale mandi prices from India's official AGMARKNET data</p></div></div></div>
+    <section class="market-intro"><div><span class="eyebrow">FARM SMARTER</span><h1>Know the market before you sell</h1><p>Compare reported minimum, maximum and modal wholesale prices by crop and mandi.</p></div><div class="market-intro-icon">🌾</div></section>
+    <section class="market-meta-row">
+      <div class="market-meta"><span>Latest reporting date in results</span><strong>{% if reporting_date %}{{ reporting_date|date:"d M Y" }}{% else %}Not available{% endif %}</strong></div>
+      <div class="market-meta"><span>Last successful data fetch</span><strong>{% if fetched_at %}{{ fetched_at|date:"d M Y, H:i" }}{% else %}Not fetched yet{% endif %}</strong></div>
+      {% if is_stale %}<div class="market-status stale">⚠ Saved data may be stale</div>{% elif records %}<div class="market-status fresh">✓ Cached response available</div>{% endif %}
+    </section>
+    {% if api_error %}<div class="market-alert" role="status">{{ api_error }}</div>{% endif %}
+    {% if is_stale and records %}<div class="market-stale-note">These are saved results, not a live quote. Check the reporting date on each row before making a selling decision.</div>{% endif %}
+    <section class="market-panel">
+      <div class="panel-heading"><div><h2>Find a mandi price</h2><p>Search by location or commodity. Dates filter the fetched result set.</p></div><span class="result-count">{{ total_records }} result{{ total_records|pluralize }}</span></div>
+      <form method="get" class="market-filters">
+        <label>State
+          <select name="state" id="stateSelect">
+            <option value="">All states</option>
+            {% for state in states %}<option value="{{ state }}" {% if filters.state == state %}selected{% endif %}>{{ state }}</option>{% endfor %}
+          </select>
+        </label>
+        <label>District
+          <select name="district" id="districtSelect" data-selected="{{ filters.district }}" {% if not filters.state %}disabled{% endif %}>
+            <option value="">All districts</option>
+            {% if filters.district %}<option value="{{ filters.district }}" selected>{{ filters.district }}</option>{% endif %}
+          </select>
+        </label>
+        <label>Commodity / crop<input name="commodity" value="{{ filters.commodity }}" placeholder="e.g. Cotton, Groundnut, Rice, Wheat"></label>
+        <label>Arrival date from<input type="date" name="from_date" value="{{ filters.from_date }}"></label>
+        <label>Arrival date to<input type="date" name="to_date" value="{{ filters.to_date }}"></label>
+        <div class="filter-actions"><button type="submit" class="primary-btn">Apply filters</button><a href="{% url 'market_prices' %}" class="reset-btn">Clear</a></div>
+      </form>
+    </section>
+    <section class="market-panel prices-panel">
+      <div class="panel-heading"><div><h2>Reported wholesale prices</h2><p>Prices are shown in ₹ per quintal (100 kg), as reported by the source.</p></div></div>
+      {% if records %}
+      <div class="table-scroll"><table class="price-table"><thead><tr><th>Commodity / variety</th><th>State / district</th><th>Market</th><th>Reporting date</th><th>Min. price</th><th>Modal price</th><th>Max. price</th></tr></thead><tbody>
+      {% for row in records %}<tr><td><strong>{{ row.commodity|default:"—" }}</strong><small>{{ row.variety|default:"Variety not specified" }}{% if row.grade %} · {{ row.grade }}{% endif %}</small></td><td>{{ row.state|default:"—" }}<small>{{ row.district|default:"—" }}</small></td><td>{{ row.market|default:"—" }}</td><td>{% if row.arrival_date %}{{ row.arrival_date }}{% else %}—{% endif %}</td><td>{% if row.min_price != None %}₹{{ row.min_price|floatformat:2 }}{% else %}—{% endif %}</td><td class="modal-price">{% if row.modal_price != None %}₹{{ row.modal_price|floatformat:2 }}{% else %}—{% endif %}</td><td>{% if row.max_price != None %}₹{{ row.max_price|floatformat:2 }}{% else %}—{% endif %}</td></tr>{% endfor %}
+      </tbody></table></div>
+      {% else %}<div class="empty-state"><span>📊</span><h3>No market records to show</h3><p>Try a broader filter, or configure the data.gov.in API key. AgroExpert will not invent or substitute sample prices.</p></div>{% endif %}
+    </section>
+    <p class="market-footnote">Source: <a href="{{ source_url }}" target="_blank" rel="noopener noreferrer">Government of India — data.gov.in / AGMARKNET</a>. This is daily wholesale mandi data, not a retail price or guaranteed real-time quote. Availability and reporting dates vary by market.</p>
+  </main>
+</div>
+<script>
+const profileBtn = document.getElementById('profileBtn');
+if (profileBtn) profileBtn.addEventListener('click', () => document.getElementById('profileMenu').classList.toggle('show'));
+const stateSelect = document.getElementById('stateSelect');
+const districtSelect = document.getElementById('districtSelect');
+async function loadDistricts(state, selected = '') {
+  districtSelect.innerHTML = '<option value="">All districts</option>';
+  districtSelect.disabled = !state;
+  if (!state) return;
+  try {
+    const response = await fetch('{% url "market_price_districts" %}?state=' + encodeURIComponent(state), {headers: {'X-Requested-With': 'XMLHttpRequest'}});
+    if (!response.ok) throw new Error('District request failed');
+    const data = await response.json();
+    (data.districts || []).forEach(name => {
+      const option = document.createElement('option');
+      option.value = name;
+      option.textContent = name;
+      if (name.toLowerCase() === selected.toLowerCase()) option.selected = true;
+      districtSelect.appendChild(option);
+    });
+    if (selected && !Array.from(districtSelect.options).some(option => option.value.toLowerCase() === selected.toLowerCase())) {
+      const option = document.createElement('option'); option.value = selected; option.textContent = selected; option.selected = true; districtSelect.appendChild(option);
+    }
+  } catch (error) {
+    districtSelect.innerHTML = '<option value="">District list unavailable</option>';
+  } finally { districtSelect.disabled = false; }
+}
+if (stateSelect && districtSelect) {
+  stateSelect.addEventListener('change', () => loadDistricts(stateSelect.value));
+  if (stateSelect.value) loadDistricts(stateSelect.value, districtSelect.dataset.selected || '');
+}
+</script>
+</body></html>
