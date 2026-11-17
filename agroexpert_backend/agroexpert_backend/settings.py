@@ -25,7 +25,11 @@ SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'agroexpert-local-development-k
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get('DJANGO_DEBUG', '1').strip().lower() in {'1', 'true', 'yes'}
-ALLOWED_HOSTS = [host.strip() for host in os.environ.get('DJANGO_ALLOWED_HOSTS', '127.0.0.1,localhost').split(',') if host.strip()]
+ALLOWED_HOSTS = [
+    "agroexpert-skpz.onrender.com",
+    "localhost",
+    "127.0.0.1",
+]
 LOGIN_URL = '/login/'
 # Application definition
 
@@ -128,3 +132,6 @@ STATIC_URL = 'static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 # Set DATA_GOV_IN_API_KEY in the environment; never commit a real API key.
 DATA_GOV_IN_API_KEY = os.environ.get("DATA_GOV_IN_API_KEY", "")
+CSRF_TRUSTED_ORIGINS = [
+    "https://agroexpert-skpz.onrender.com",
+]
